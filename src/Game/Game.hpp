@@ -19,6 +19,7 @@ using namespace std;
 #include "ChickPiece.hpp"
 #include "HenPiece.hpp"
 #include "State.hpp"
+#include "AIBrain.hpp"
 
 
 class Game
@@ -30,7 +31,7 @@ private:
     shared_ptr<ImageBank> imgBank;
     HumanPlayer* player;
     AIPlayer* ai;
-    bool isAITurn = false;
+    AIBrain brain;
     int pieceWidth;
     int pieceHeight;
     int xOffset;
@@ -40,6 +41,7 @@ private:
     void movePiece(GamePiecePtr selectedPiece, int x, int y);
     void promotePiece(GamePiecePtr piece);
     void handleDroppedPiece(int x,int y);
+    bool playersTurn = false;
     
 public:
     Game(State& _state, shared_ptr<ImageBank> _imgBank);
@@ -49,6 +51,7 @@ public:
     void drawGame();
     void handlePlayerClick(int x, int y);
     void checkEnd();
+    void takeAITurn();
     
 };
 

@@ -42,7 +42,8 @@ public:
     int getY(){ return y;};
     PieceType getType(){ return type;};
     Player* getOwner(){ return owner;};
-
+    
+    void setOwner(Player* _owner){owner = _owner;};
     void drawPiece(int xOffset, int w, int yOffset, int h);
 };
 

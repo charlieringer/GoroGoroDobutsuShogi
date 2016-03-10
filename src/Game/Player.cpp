@@ -13,14 +13,13 @@
 #include "LionPiece.hpp"
 #include "ElephantPiece.hpp"
 
-Player:: Player()
+Player::Player(bool isAI): ai(isAI)
 {
     
 }
 
 Player::~Player()
 {
-    
 }
 
 void Player::addToBank(PieceType type){};
@@ -64,13 +63,13 @@ void AIPlayer::addToBank(PieceType type)
 }
 
 
-AIPlayer::AIPlayer(shared_ptr<ImageBank> _imgBank)
+AIPlayer::AIPlayer(shared_ptr<ImageBank> _imgBank): Player(true)
 {
     
     imgBank = _imgBank;
 }
 
-AIPlayer::AIPlayer( const AIPlayer &player)
+AIPlayer::AIPlayer( const AIPlayer &player): Player(true)
 {
     imgBank = player.getImageBank();
     for(GamePiecePtr bankPiece : player.getBankConst())
@@ -90,17 +89,22 @@ AIPlayer::AIPlayer( const AIPlayer &player)
         else if (type == PieceType::HEN)
         bank.push_back(make_shared<HenPiece>(pieceX,pieceY, this, imgBank));
     }
-
-    
 }
 
-HumanPlayer::HumanPlayer(shared_ptr<ImageBank> _imgBank)
+Player* AIPlayer::clonePlayer()
+{
+    Player* clone = new AIPlayer(*this);
+    return clone;
+}
+
+
+HumanPlayer::HumanPlayer(shared_ptr<ImageBank> _imgBank): Player(false)
 {
     imgBank = _imgBank;
     
 }
 
-HumanPlayer::HumanPlayer(const HumanPlayer &player)
+HumanPlayer::HumanPlayer(const HumanPlayer &player): Player(false)
 {
     imgBank = player.getImageBank();
     for(GamePiecePtr bankPiece : player.getBankConst())
@@ -121,4 +125,10 @@ HumanPlayer::HumanPlayer(const HumanPlayer &player)
             bank.push_back(make_shared<HenPiece>(pieceX,pieceY, this, imgBank));
     }
     
+}
+
+Player* HumanPlayer::clonePlayer()
+{
+    Player* clone = new HumanPlayer(*this);
+    return clone;
 }

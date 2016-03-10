@@ -17,13 +17,11 @@
 class AIBrain
 {
 private:
-    vector<GamePiecePtr> gameboard;
-    Player player1;
-    Player player2;
-    Lookahead currentState;
+    //Lookahead currentState;
     
 public:
-    void getNextMove();
+    AIBrain();
+    void getNextMove(vector<GamePiecePtr>& gameBoard, Player* p1, Player* p2);
 };
 
 #endif /* AIBrain_hpp */

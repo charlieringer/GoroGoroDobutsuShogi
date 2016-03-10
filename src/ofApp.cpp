@@ -12,6 +12,7 @@ void ofApp::update(){
         case(FRONTEND):
             break;
         case(INGAME):
+            game.takeAITurn();
             game.checkEnd();
             break;
         case(GAMEOVERWIN):

@@ -27,16 +27,18 @@ class Player
 {
 protected:
     vector<shared_ptr<GamePiece>> bank;
-    shared_ptr<ImageBank> imgBank;
+    shared_ptr<ImageBank> imgBank = nullptr;
+    bool ai;
 public:
-    Player();
+    Player(bool isAI);
     Player(const Player &player);
-    ~Player();
+    virtual ~Player();
     virtual bool isAI(){};
     shared_ptr<ImageBank> getImageBank() const{ return imgBank;};
     vector<shared_ptr<GamePiece>>& getBankRef() { return bank;};
     vector<shared_ptr<GamePiece>> getBankConst() const { return bank;};
     virtual void addToBank(PieceType type);
+    virtual Player* clonePlayer() = 0;
 };
 
 class HumanPlayer: public Player
@@ -47,7 +49,8 @@ public:
     HumanPlayer(shared_ptr<ImageBank> imgBank);
     HumanPlayer( const HumanPlayer &HumanPlayer);
     void addToBank(PieceType type);
-    bool isAI(){ return false; };
+    bool isAI(){ return ai; };
+    virtual Player* clonePlayer();
     
     
 };
@@ -58,7 +61,8 @@ public:
     AIPlayer(shared_ptr<ImageBank> imgBank);
     AIPlayer( const AIPlayer &player);
     void addToBank(PieceType type);
-    bool isAI(){ return true; };
+    bool isAI(){ return ai; };
+    virtual Player* clonePlayer();
     
 };
 

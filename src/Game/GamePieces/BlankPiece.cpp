@@ -10,7 +10,9 @@
 
 BlankPiece::BlankPiece(int x, int y, shared_ptr<ImageBank> imgBank, Player* _owner ): GamePiece(x,y,_owner)
 {
-    setDisplayImage("Blank.png", imgBank);
+    if (imgBank)
+        setDisplayImage("Blank.png", imgBank);
+    
     type = PieceType::BLANK;
 }
 

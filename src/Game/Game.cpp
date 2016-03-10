@@ -58,8 +58,16 @@ void Game::drawGame()
     }
 }
 
+void Game::takeAITurn()
+{
+    if(playersTurn) return;
+    brain.getNextMove(gameboard, ai, player);
+    playersTurn = true;
+}
+
 void Game::handlePlayerClick(int x, int y)
 {
+    if(!playersTurn) return;
     if (playerSelectedPiece != NULL)
     {
         int convertedX = (int)floor((x-xOffset)/pieceWidth+1)-1;
