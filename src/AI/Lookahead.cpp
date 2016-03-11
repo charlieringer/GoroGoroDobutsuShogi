@@ -15,21 +15,31 @@
 
 Lookahead::Lookahead(vector<GamePiecePtr>& _gameboard, Player* _player1, Player* _player2, Lookahead* _parent, int _depthLevel): parent(_parent), gameboard(_gameboard), player1(_player1), player2(_player2), depthLevel(_depthLevel)
 {
+    assert(_gameboard.size()==12);
+    depthLevel = _depthLevel;
     isTerminal = checkTerminality();
     if (isTerminal)
     {
        parent->addChildWin(); 
     }
-    else generateChildren();
+    else
+    {
+       if(depthLevel < 12)
+       {
+           cout << depthLevel <<endl;
+         generateChildren();
+       }
+    }
 }
 
 Lookahead::Lookahead(vector<GamePiecePtr>& _gameboard, Player* _player1, Player* _player2): depthLevel(0)
 {
-    
+    assert(_gameboard.size()==12);
     player1 = _player1->clonePlayer();
     player2 = _player2->clonePlayer();
     gameboard = copyGameBoard(_gameboard, player1, player2);
-    generateChildren();
+    if (depthLevel == 0)
+        generateChildren();
 }
 
 Lookahead::~Lookahead()
@@ -42,11 +52,11 @@ void Lookahead::generateChildren()
 {
     for (int i = 0; i < gameboard.size(); i++)
     {
-        GamePiecePtr currentPiece = gameboard[i];
-        if(currentPiece->getOwner() == player1)
+        if(gameboard[i]->getOwner() == player1)
         {
-            int thisX = currentPiece->getX();
-            int thisY = currentPiece->getY();
+            GamePiecePtr movingPiece = gameboard[i];
+            int thisX = movingPiece->getX();
+            int thisY = movingPiece->getY();
             
             for(int j = 0; j < gameboard.size(); j++)
             {
@@ -54,9 +64,8 @@ void Lookahead::generateChildren()
                 int targetX = targetPosPiece->getX();
                 int targetY = targetPosPiece->getY();
                 
-                if(targetX == thisX && targetY == thisY) continue;
-                else if(targetPosPiece->getOwner() == player1) continue;
-                else if(!currentPiece->canMove(targetX,targetY)) continue;
+                if(targetPosPiece->getOwner() == player1) continue;
+                else if(!movingPiece->canMove(targetX,targetY)) continue;
                 
                 else if (targetPosPiece->getType() == PieceType::BLANK)
                 {
@@ -75,7 +84,8 @@ void Lookahead::generateChildren()
                         //And promote if needed
                         simulatePromotion(boardClone, clonedCurrentPiece, cloneOf1);
                     }
-                    children.push_back(Lookahead(boardClone, cloneOf2, cloneOf1, this, depthLevel++));
+                    assert(boardClone.size()==12);
+                    children.push_back(Lookahead(boardClone, cloneOf2, cloneOf1, this, ++depthLevel));
                 } else {
                     //Remove captured piece and replace capturing piece with blank piece.
                     Player* cloneOf1 = player1->clonePlayer();
@@ -84,15 +94,11 @@ void Lookahead::generateChildren()
                     GamePiecePtr clonedCurrentPiece = boardClone[i];
                     GamePiecePtr clonedTargetPiece = boardClone[j];
 
-                    if(clonedCurrentPiece->getOwner()->isAI() == cloneOf1->isAI())
-                    {
-                        cloneOf1->addToBank(clonedTargetPiece->getType());
-                    } else {
-                        cloneOf2->addToBank(clonedTargetPiece->getType());
-                    }
-                    gameboard.push_back(make_shared<BlankPiece>(clonedTargetPiece->getX(),clonedTargetPiece->getY()));
+                    cloneOf1->addToBank(clonedTargetPiece->getType());
+                   
+                    boardClone.push_back(make_shared<BlankPiece>(clonedCurrentPiece->getX(), clonedCurrentPiece->getY()));
                     clonedCurrentPiece->moveTo(clonedTargetPiece->getX(), clonedTargetPiece->getY());
-                    gameboard.erase(gameboard.begin() + i);
+                    boardClone.erase(boardClone.begin() + j);
                     
                     //check for promotion
                     if(clonedCurrentPiece->getType() == PieceType::CHICK &&
@@ -102,7 +108,8 @@ void Lookahead::generateChildren()
                         //And promote if needed
                         simulatePromotion(boardClone, clonedCurrentPiece, cloneOf1);
                     }
-                    children.push_back(Lookahead(boardClone, cloneOf2, cloneOf1, this, depthLevel++));
+                    assert(boardClone.size()==12);
+                    children.push_back(Lookahead(boardClone, cloneOf2, cloneOf1, this, ++depthLevel));
                 }
             }
         }
@@ -117,7 +124,8 @@ void Lookahead::generateChildren()
             Player* cloneOf2 = player2->clonePlayer();
             vector<GamePiecePtr> copyBoard = copyGameBoard(gameboard, cloneOf1, cloneOf2);
             simulateDroppedPiece(copyBoard, cloneOf1->getBankRef()[i], cloneOf1, boardPiece->getX(), boardPiece->getY());
-            children.push_back(Lookahead(copyBoard, cloneOf1, cloneOf2, this, depthLevel+1));
+            assert(copyBoard.size()==12);
+            children.push_back(Lookahead(copyBoard, cloneOf1, cloneOf2, this, ++depthLevel));
         }
         
     }
@@ -125,18 +133,20 @@ void Lookahead::generateChildren()
 
 void Lookahead::simulateDroppedPiece(vector<GamePiecePtr> &board, GamePiecePtr piece, Player* owner, int x,int y)
 {
+    assert(board.size()==12);
     board.erase(
                 std::remove_if(board.begin(), board.end(),
                                [x,y](GamePiecePtr thisPiece)
                                { return thisPiece->getX() == x && thisPiece->getY() == y; })
                 );
+    assert(board.size()==11);
     if(piece->getType() == PieceType::CHICK)
-        gameboard.push_back(make_shared<ChickPiece>(x, y, owner));
+        board.push_back(make_shared<ChickPiece>(x, y, owner));
     else if(piece->getType() == PieceType::GIRAFFE)
-        gameboard.push_back(make_shared<GiraffePiece>(x, y, owner));
+        board.push_back(make_shared<GiraffePiece>(x, y, owner));
     else if(piece->getType() == PieceType::ELEPHANT)
-        gameboard.push_back(make_shared<ElephantPiece>(x, y, owner));
-    
+        board.push_back(make_shared<ElephantPiece>(x, y, owner));
+    assert(board.size()==12);
     int removeX = piece->getX();
     int removeY = piece->getY();
     vector<shared_ptr<GamePiece>>& bank = owner->getBankRef();

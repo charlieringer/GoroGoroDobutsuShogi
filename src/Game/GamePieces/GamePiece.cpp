@@ -13,7 +13,8 @@ GamePiece::GamePiece(int _x, int _y, Player* _owner = NULL): x(_x), y(_y), owner
 
 void GamePiece::setDisplayImage(string path, shared_ptr<ImageBank> imgBank)
 {
-    dispImage = imgBank->loadImage(path);
+   if (imgBank)
+        dispImage = imgBank->loadImage(path);
 }
 
 bool GamePiece::canMove(int newX, int newY){}

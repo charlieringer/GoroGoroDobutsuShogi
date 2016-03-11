@@ -16,7 +16,7 @@ HenPiece::HenPiece(int x, int y, Player* _owner, shared_ptr<ImageBank> imgBank )
         if(_owner->isAI()) setDisplayImage("hen2.png", imgBank);
         else setDisplayImage("hen2.png", imgBank);
     }
-    type = PieceType::CHICK;
+    type = PieceType::HEN;
 }
 
 bool HenPiece::canMove(int newX, int newY)

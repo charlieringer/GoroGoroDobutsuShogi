@@ -21,7 +21,7 @@ private:
     vector<Lookahead> children;
     Lookahead* parent = nullptr;
     int wins = 0;
-    int loses = 0;
+    int losses = 0;
     int depthLevel;
     bool isTerminal;
     
@@ -36,11 +36,12 @@ public:
     Lookahead(vector<GamePiecePtr>& _gameboard, Player* _player1, Player* _player2);
     ~Lookahead();
     
-    int getNumbCompletedGames(){ return wins+loses;};
+    int getNumbCompletedGames(){ return wins+losses;};
     int getWins(){ return wins;};
-    int getLoses( ){return loses;};
+    int getLosses( ){return losses;};
     int getNumbChildren(){ return children.size();};
-    float getScore(){return wins/(wins+loses);};
+    //float getScore(){ return 100*(wins/(wins+losses));};
+    //float getScore(){ return 1;};
     
     void addChildWin(){
         wins++;
@@ -50,12 +51,13 @@ public:
         }
     };
     void addChildLose(){
-        loses++;
+        losses++;
         if(parent)
         {
             parent->addChildWin();
         }
     };
+    vector<Lookahead> getChildren(){ return children;};
     
 };
 

@@ -75,6 +75,7 @@ void Game::handlePlayerClick(int x, int y)
         if ((playerSelectedPiece->getY() == 5||playerSelectedPiece->getY() == 4) && convertedY >= 0 && convertedY < 4)
         {
             handleDroppedPiece(convertedX,convertedY);
+            playersTurn = false;
             return;
         }
         //See if we have clicked on a piece we can move/drop
@@ -87,11 +88,13 @@ void Game::handlePlayerClick(int x, int y)
                 if(piece->getX() == convertedX && piece->getY() == convertedY && piece->getOwner() == playerSelectedPiece->getOwner())
                 {
                     playerSelectedPiece = piece;
+                    
                     return;
                 }
             }
             movePiece(playerSelectedPiece, convertedX, convertedY);
             playerSelectedPiece = NULL;
+            playersTurn = false;
         }
         
     }
