@@ -58,6 +58,9 @@ public:
     int getLosses( ){return losses;};
     int getNumbChildren(){ return children.size();};
     int getDepth(){ return depthLevel;};
+    Player* getPlayer1(){ return player1;};
+    Player* getPlayer2(){ return player2;};
+    vector<GamePiecePtr> getBoard(){ return gameboard;};
     Lookahead* getParent(){ return parent;};
     
     void randomPlayOutFromHere();

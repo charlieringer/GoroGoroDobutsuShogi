@@ -269,14 +269,14 @@ void Lookahead::randomPlayOutFromHere()
             if(evaluatedMoves.size()%2 == 0)
             {
                 games++;
-                wins++;
-                parent->addLoss();
+                losses++;
+                parent->addWin();
             }
             else
             {
                 games++;
-                losses++;
-                parent->addWin();
+                wins++;
+                parent->addLoss();
             }
             terminalStateFound = true;
         } else {

@@ -37,6 +37,7 @@ public:
     vector<shared_ptr<GamePiece>>& getBankRef() { return bank;};
     vector<shared_ptr<GamePiece>> getBankConst() const { return bank;};
     virtual void addToBank(PieceType type);
+    void clearBank(){ bank.clear();};
     virtual Player* clonePlayer() = 0;
 };
 

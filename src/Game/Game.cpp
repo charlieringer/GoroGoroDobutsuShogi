@@ -7,6 +7,7 @@
 //
 
 #include "Game.hpp"
+#include "Lookahead.hpp"
 
 Game::Game(State& _state, shared_ptr<ImageBank> _imgBank): xOffset(100), yOffset(160), pieceHeight(80), pieceWidth(80)
 {
@@ -61,7 +62,62 @@ void Game::drawGame()
 void Game::takeAITurn()
 {
     if(playersTurn) return;
-    brain.getNextMove(gameboard, ai, player);
+    Lookahead stateFromAI = brain.getNextMove(gameboard, ai, player);
+    gameboard.clear();
+    vector<GamePiecePtr> aiBoard = stateFromAI.getBoard();
+    for(auto piece : aiBoard)
+    {
+        int x = piece->getX();
+        int y = piece->getY();
+        PieceType type = piece->getType();
+        if(type == PieceType::BLANK)
+        {
+            gameboard.push_back(make_shared<BlankPiece>(x,y, imgBank));
+        } else if(piece->getOwner()->isAI())
+        {
+            if (type == PieceType::GIRAFFE)
+                gameboard.push_back(make_shared<GiraffePiece>(x,y, ai, imgBank));
+            else if (type == PieceType::LION)
+                gameboard.push_back(make_shared<LionPiece>(x,y, ai, imgBank));
+            else if (type == PieceType::ELEPHANT)
+                gameboard.push_back(make_shared<ElephantPiece>(x,y, ai, imgBank));
+            else if (type == PieceType::CHICK)
+                gameboard.push_back(make_shared<ChickPiece>(x,y, ai, imgBank));
+            else if (type == PieceType::HEN)
+                gameboard.push_back(make_shared<HenPiece>(x,y, ai, imgBank));
+        } else  if(!(piece->getOwner()->isAI()))
+        {
+            if (type == PieceType::GIRAFFE)
+                gameboard.push_back(make_shared<GiraffePiece>(x,y, player, imgBank));
+            else if (type == PieceType::LION)
+                gameboard.push_back(make_shared<LionPiece>(x,y, player, imgBank));
+            else if (type == PieceType::ELEPHANT)
+                gameboard.push_back(make_shared<ElephantPiece>(x,y, player, imgBank));
+            else if (type == PieceType::CHICK)
+                gameboard.push_back(make_shared<ChickPiece>(x,y, player, imgBank));
+            else if (type == PieceType::HEN)
+                gameboard.push_back(make_shared<HenPiece>(x,y, player, imgBank));
+        }
+        player->clearBank();
+        ai->clearBank();
+        
+        for(auto piece: stateFromAI.getPlayer1()->getBankRef())
+        {
+           if (stateFromAI.getPlayer1()->isAI())
+               ai->addToBank(piece->getType());
+            else
+                player->addToBank(piece->getType());
+        }
+        
+        for(auto piece: stateFromAI.getPlayer2()->getBankRef())
+        {
+            if (stateFromAI.getPlayer2()->isAI())
+                ai->addToBank(piece->getType());
+            else
+                player->addToBank(piece->getType());
+        }
+        
+    }
     playersTurn = true;
 }
 
@@ -172,6 +228,7 @@ void Game::handleDroppedPiece(int x,int y)
     for(GamePiecePtr &piece : gameboard)
     {
         if(piece->getX() == x && piece->getY() == y && piece->getType() != PieceType::BLANK) return;
+        if(piece->getOwner() == player) return;
     }
     
     gameboard.erase(

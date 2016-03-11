@@ -10,7 +10,7 @@
 
 AIBrain::AIBrain(){};
 
-void AIBrain::getNextMove(vector<GamePiecePtr>& gameBoard, Player* p1, Player* p2)
+Lookahead AIBrain::getNextMove(vector<GamePiecePtr>& gameBoard, Player* p1, Player* p2)
 {
     Lookahead currentState = Lookahead(gameBoard, p1, p2);
     
@@ -25,7 +25,7 @@ void AIBrain::getNextMove(vector<GamePiecePtr>& gameBoard, Player* p1, Player* p
     }
     
     int nodesExplored = 0;
-    while(nodesExplored < 100){
+    while(nodesExplored < 10){
         //Increment the number of nodes explored
         nodesExplored++;
         
@@ -81,6 +81,8 @@ void AIBrain::getNextMove(vector<GamePiecePtr>& gameBoard, Player* p1, Player* p
         }
     }
 
+    int bestScore = -1;
+    int bestIndex = -1;
     for(int i = 0; i < potentialMoves.size(); i++)
     {
         float losses = potentialMoves[i].getLosses();
@@ -89,7 +91,12 @@ void AIBrain::getNextMove(vector<GamePiecePtr>& gameBoard, Player* p1, Player* p
         cout << i << " th move played: " << losses+wins << endl;
         //cout << i << " th move win: " << wins << endl;
         cout << i << " th move scores: " << score << endl;
+        if(score > bestScore)
+        {
+            bestScore = score;
+            bestIndex = i;
+        }
     }
     cout << "States Played = " << currentState.getNumbCompletedGames() << " Losses = " << currentState.getLosses() << " Wins = " << currentState.getWins() << endl;
-    cout << "Stop";
+    return potentialMoves[bestIndex];
 }
