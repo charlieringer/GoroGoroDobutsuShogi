@@ -19,7 +19,6 @@ using namespace std;
 //Forward declaration of game piece
 class GamePiece;
 
-
 enum class PieceType;
 
 
@@ -33,7 +32,7 @@ public:
     Player(bool isAI);
     Player(const Player &player);
     virtual ~Player();
-    virtual bool isAI(){};
+    virtual bool isAI() = 0;
     shared_ptr<ImageBank> getImageBank() const{ return imgBank;};
     vector<shared_ptr<GamePiece>>& getBankRef() { return bank;};
     vector<shared_ptr<GamePiece>> getBankConst() const { return bank;};

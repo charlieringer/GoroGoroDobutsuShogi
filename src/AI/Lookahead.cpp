@@ -16,42 +16,31 @@
 Lookahead::Lookahead(vector<GamePiecePtr>& _gameboard, Player* _player1, Player* _player2, Lookahead* _parent, int _depthLevel): parent(_parent), gameboard(_gameboard), player1(_player1), player2(_player2), depthLevel(_depthLevel)
 {
     assert(_gameboard.size()==12);
-    depthLevel = _depthLevel;
     isTerminal = checkTerminality();
-    if (isTerminal)
-    {
-       parent->addChildWin(); 
-    }
-    else
-    {
-       if(depthLevel < 12)
-       {
-           cout << depthLevel <<endl;
-         generateChildren();
-       }
-    }
 }
 
-Lookahead::Lookahead(vector<GamePiecePtr>& _gameboard, Player* _player1, Player* _player2): depthLevel(0)
+Lookahead::Lookahead(vector<GamePiecePtr>& _gameboard, Player* _player1, Player* _player2): depthLevel(0), parent(nullptr)
 {
     assert(_gameboard.size()==12);
     player1 = _player1->clonePlayer();
     player2 = _player2->clonePlayer();
     gameboard = copyGameBoard(_gameboard, player1, player2);
-    if (depthLevel == 0)
-        generateChildren();
+    children = generateChildren();
+    isTerminal = checkTerminality();
 }
 
 Lookahead::~Lookahead()
 {
-  //  delete player1;
-   // delete player2;
+   //delete player1;
+   //delete player2;
 }
 
-void Lookahead::generateChildren()
+vector<Lookahead> Lookahead::generateChildren()
 {
+    vector<Lookahead> returnChildren;
     for (int i = 0; i < gameboard.size(); i++)
     {
+        assert(player1);
         if(gameboard[i]->getOwner() == player1)
         {
             GamePiecePtr movingPiece = gameboard[i];
@@ -84,8 +73,10 @@ void Lookahead::generateChildren()
                         //And promote if needed
                         simulatePromotion(boardClone, clonedCurrentPiece, cloneOf1);
                     }
+                    assert(cloneOf1);
+                    assert(cloneOf2);
                     assert(boardClone.size()==12);
-                    children.push_back(Lookahead(boardClone, cloneOf2, cloneOf1, this, ++depthLevel));
+                    returnChildren.push_back(Lookahead(boardClone, cloneOf2, cloneOf1, this, depthLevel+1));
                 } else {
                     //Remove captured piece and replace capturing piece with blank piece.
                     Player* cloneOf1 = player1->clonePlayer();
@@ -108,8 +99,10 @@ void Lookahead::generateChildren()
                         //And promote if needed
                         simulatePromotion(boardClone, clonedCurrentPiece, cloneOf1);
                     }
+                    assert(cloneOf1);
+                    assert(cloneOf2);
                     assert(boardClone.size()==12);
-                    children.push_back(Lookahead(boardClone, cloneOf2, cloneOf1, this, ++depthLevel));
+                    returnChildren.push_back(Lookahead(boardClone, cloneOf2, cloneOf1, this, depthLevel+1));
                 }
             }
         }
@@ -117,22 +110,26 @@ void Lookahead::generateChildren()
     vector<GamePiecePtr> playerBank = player1->getBankRef();
     for(int i = 0; i < playerBank.size(); i++)
     {
-        for(GamePiecePtr boardPiece : gameboard)
+        for(GamePiecePtr& boardPiece : gameboard)
         {
             if (boardPiece->getType() != PieceType::BLANK) continue;
             Player* cloneOf1 = player1->clonePlayer();
             Player* cloneOf2 = player2->clonePlayer();
             vector<GamePiecePtr> copyBoard = copyGameBoard(gameboard, cloneOf1, cloneOf2);
             simulateDroppedPiece(copyBoard, cloneOf1->getBankRef()[i], cloneOf1, boardPiece->getX(), boardPiece->getY());
+            assert(cloneOf1);
+            assert(cloneOf2);
             assert(copyBoard.size()==12);
-            children.push_back(Lookahead(copyBoard, cloneOf1, cloneOf2, this, ++depthLevel));
+            returnChildren.push_back(Lookahead(copyBoard, cloneOf1, cloneOf2, this, depthLevel+1));
         }
         
     }
+    return returnChildren;
 }
 
 void Lookahead::simulateDroppedPiece(vector<GamePiecePtr> &board, GamePiecePtr piece, Player* owner, int x,int y)
 {
+    if(!piece) return;
     assert(board.size()==12);
     board.erase(
                 std::remove_if(board.begin(), board.end(),
@@ -146,6 +143,8 @@ void Lookahead::simulateDroppedPiece(vector<GamePiecePtr> &board, GamePiecePtr p
         board.push_back(make_shared<GiraffePiece>(x, y, owner));
     else if(piece->getType() == PieceType::ELEPHANT)
         board.push_back(make_shared<ElephantPiece>(x, y, owner));
+    else
+        board.push_back(make_shared<BlankPiece>(x,y));
     assert(board.size()==12);
     int removeX = piece->getX();
     int removeY = piece->getY();
@@ -173,6 +172,7 @@ bool Lookahead::checkTerminality()
 {
     //We only care about a capture on player1 as player2 played last turn and you can only win on your turn not lose
     bool player1HasLion = false;
+    bool player2HasLion = false;
     for(GamePiecePtr &gamePiece : gameboard)
     {
         if(gamePiece)
@@ -181,6 +181,7 @@ bool Lookahead::checkTerminality()
             {
                 if (gamePiece->getOwner() == player2)
                 {
+                    player2HasLion = true;
                     if ((gamePiece->getY() == 0 && !(gamePiece->getOwner()->isAI())) ||
                         (gamePiece->getY() == 3 && gamePiece->getOwner()->isAI()) )
                     {
@@ -193,6 +194,11 @@ bool Lookahead::checkTerminality()
             }
         }
     }
+    if(!player2HasLion)
+    {
+        return true;
+    }
+   // assert(player2HasLion);
     if(!player1HasLion)
     {
         return true;
@@ -221,6 +227,65 @@ vector<GamePiecePtr> Lookahead::copyGameBoard(vector<GamePiecePtr> initalBoard, 
     }
     assert(returnBoard.size()==12);
     return returnBoard;
+}
+
+void Lookahead::randomPlayOutFromHere()
+{
+    //We randomly playout till we reach a terminal state
+    bool terminalStateFound = false;
+    
+    //This are the potential moves
+    assert(player1);
+    assert(player2);
+    vector<Lookahead> playOutChildren = generateChildren();
+    //Of which we are selecting a random one
+    if(playOutChildren.size() == 0) return;
+    int randomIndex = rand()%playOutChildren.size();
+    
+    if(playOutChildren[randomIndex].checkTerminality())
+    {
+        games++;
+        losses++;
+        parent->addWin();
+        return;
+    }
+    
+    //These are the moves we have looked at (so we are going to build a list which will represent the entire played out game)
+    vector<Lookahead> evaluatedMoves;
+    //We add the first random child to it
+    evaluatedMoves.push_back(playOutChildren[randomIndex]);
+
+    //While we have not found a termina state
+    while(!terminalStateFound)
+    {
+        //We continue
+        if(evaluatedMoves[evaluatedMoves.size()-1].terminal())
+        {
+            if(evaluatedMoves.size()%2 == 0)
+            {
+                games++;
+                wins++;
+                parent->addLoss();
+            }
+            else
+            {
+                games++;
+                losses++;
+                parent->addWin();
+            }
+            terminalStateFound = true;
+        } else {
+            vector<Lookahead> playOutChildren = evaluatedMoves[evaluatedMoves.size()-1].generateChildren();
+            if (evaluatedMoves[evaluatedMoves.size()-1].getDepth() > 78)
+            {
+                games++;
+               return;
+            }
+            randomIndex = rand()%playOutChildren.size();
+            evaluatedMoves.push_back(playOutChildren[randomIndex]);
+        }
+    }
+    
 }
 
 

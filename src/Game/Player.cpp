@@ -18,9 +18,8 @@ Player::Player(bool isAI): ai(isAI)
     
 }
 
-Player::~Player()
-{
-}
+Player::~Player(){}
+
 
 void Player::addToBank(PieceType type){};
 
@@ -39,7 +38,7 @@ void HumanPlayer::addToBank(PieceType type)
         piece = make_shared<ChickPiece>((bank.size()-1)-(row*5),4+row, this, imgBank);
     else if (type == PieceType::HEN)
         piece = make_shared<ChickPiece>((bank.size()-1)-(row*5),4+row, this, imgBank);
-    assert(piece != NULL);
+    assert(piece);
     bank.push_back(piece);
 }
 
@@ -58,7 +57,7 @@ void AIPlayer::addToBank(PieceType type)
         piece = make_shared<ChickPiece>(bank.size()-1-(row*5),-(1+row), this, imgBank);
     else if (type == PieceType::HEN)
         piece = make_shared<ChickPiece>(bank.size()-1-(row*5),-(1+row), this, imgBank);
-    assert(piece != NULL);
+    assert(piece);
     bank.push_back(piece);
 }
 
@@ -74,6 +73,7 @@ AIPlayer::AIPlayer( const AIPlayer &player): Player(true)
     imgBank = player.getImageBank();
     for(GamePiecePtr bankPiece : player.getBankConst())
     {
+        assert(bankPiece);
         int pieceX = bankPiece->getX();
         int pieceY = bankPiece->getY();
         PieceType type = bankPiece->getType();
@@ -101,7 +101,6 @@ Player* AIPlayer::clonePlayer()
 HumanPlayer::HumanPlayer(shared_ptr<ImageBank> _imgBank): Player(false)
 {
     imgBank = _imgBank;
-    
 }
 
 HumanPlayer::HumanPlayer(const HumanPlayer &player): Player(false)
@@ -109,6 +108,7 @@ HumanPlayer::HumanPlayer(const HumanPlayer &player): Player(false)
     imgBank = player.getImageBank();
     for(GamePiecePtr bankPiece : player.getBankConst())
     {
+        assert(bankPiece);
         int pieceX = bankPiece->getX();
         int pieceY = bankPiece->getY();
         PieceType type = bankPiece->getType();
@@ -124,7 +124,6 @@ HumanPlayer::HumanPlayer(const HumanPlayer &player): Player(false)
         else if (type == PieceType::HEN)
             bank.push_back(make_shared<HenPiece>(pieceX,pieceY, this, imgBank));
     }
-    
 }
 
 Player* HumanPlayer::clonePlayer()
