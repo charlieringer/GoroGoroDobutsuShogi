@@ -1255,11 +1255,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/AI/Lookahead.cpp"
-            timestampString = "479398358.805802"
+            timestampString = "479402174.875173"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "171"
-            endingLineNumber = "171"
+            startingLineNumber = "176"
+            endingLineNumber = "176"
             landmarkName = "Lookahead::checkTerminality()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1367,11 +1367,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/AI/Lookahead.cpp"
-            timestampString = "479398358.805802"
+            timestampString = "479402174.875173"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "159"
-            endingLineNumber = "159"
+            startingLineNumber = "164"
+            endingLineNumber = "164"
             landmarkName = "Lookahead::simulatePromotion(vector&lt;GamePiecePtr&gt; &amp;board, GamePiecePtr piece, Player* owner)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1463,11 +1463,59 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/AI/Lookahead.cpp"
-            timestampString = "479398358.805802"
+            timestampString = "479402174.875173"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "122"
-            endingLineNumber = "122"
+            startingLineNumber = "136"
+            endingLineNumber = "136"
+            landmarkName = "Lookahead::simulateDroppedPiece(vector&lt;GamePiecePtr&gt; &amp;board, GamePiecePtr piece, Player* owner, int x,int y)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/AI/Lookahead.cpp"
+            timestampString = "479402174.875173"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "142"
+            endingLineNumber = "142"
+            landmarkName = "Lookahead::simulateDroppedPiece(vector&lt;GamePiecePtr&gt; &amp;board, GamePiecePtr piece, Player* owner, int x,int y)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/AI/Lookahead.cpp"
+            timestampString = "479402174.875173"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "143"
+            endingLineNumber = "143"
+            landmarkName = "Lookahead::simulateDroppedPiece(vector&lt;GamePiecePtr&gt; &amp;board, GamePiecePtr piece, Player* owner, int x,int y)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/AI/Lookahead.cpp"
+            timestampString = "479402174.875173"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "119"
+            endingLineNumber = "119"
             landmarkName = "Lookahead::generateChildren()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1479,75 +1527,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/AI/Lookahead.cpp"
-            timestampString = "479398358.805802"
+            timestampString = "479402174.875173"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "133"
-            endingLineNumber = "133"
-            landmarkName = "Lookahead::simulateDroppedPiece(vector&lt;GamePiecePtr&gt; &amp;board, GamePiecePtr piece, Player* owner, int x,int y)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "src/AI/Lookahead.cpp"
-            timestampString = "479398358.805802"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "139"
-            endingLineNumber = "139"
-            landmarkName = "Lookahead::simulateDroppedPiece(vector&lt;GamePiecePtr&gt; &amp;board, GamePiecePtr piece, Player* owner, int x,int y)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "src/AI/Lookahead.cpp"
-            timestampString = "479398358.805802"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "140"
-            endingLineNumber = "140"
-            landmarkName = "Lookahead::simulateDroppedPiece(vector&lt;GamePiecePtr&gt; &amp;board, GamePiecePtr piece, Player* owner, int x,int y)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "src/AI/Lookahead.cpp"
-            timestampString = "479398358.805802"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "118"
-            endingLineNumber = "118"
-            landmarkName = "Lookahead::generateChildren()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "src/AI/Lookahead.cpp"
-            timestampString = "479398358.805802"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "123"
-            endingLineNumber = "123"
+            startingLineNumber = "125"
+            endingLineNumber = "125"
             landmarkName = "Lookahead::generateChildren()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1591,11 +1575,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/AI/Lookahead.cpp"
-            timestampString = "479400612.51937"
+            timestampString = "479402174.875173"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "259"
-            endingLineNumber = "259"
+            startingLineNumber = "264"
+            endingLineNumber = "264"
             landmarkName = "Lookahead::randomPlayOutFromHere()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1607,11 +1591,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/AI/Lookahead.cpp"
-            timestampString = "479400612.51937"
+            timestampString = "479402174.875173"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "278"
-            endingLineNumber = "278"
+            startingLineNumber = "283"
+            endingLineNumber = "283"
             landmarkName = "Lookahead::randomPlayOutFromHere()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1623,11 +1607,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/AI/Lookahead.cpp"
-            timestampString = "479400612.51937"
+            timestampString = "479402174.875173"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "288"
-            endingLineNumber = "288"
+            startingLineNumber = "293"
+            endingLineNumber = "293"
             landmarkName = "Lookahead::randomPlayOutFromHere()"
             landmarkType = "5">
             <Locations>
@@ -1639,11 +1623,11 @@
                   moduleName = "papTermTwoCourseWorkDebug"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Charlie/Documents/openFrameworks/apps/myApps/papTermTwoCourseWork/src/AI/Lookahead.cpp"
-                  timestampString = "479401148.00354"
+                  timestampString = "479402333.302119"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "289"
-                  endingLineNumber = "289"
+                  startingLineNumber = "294"
+                  endingLineNumber = "294"
                   offsetFromSymbolStart = "545">
                </Location>
                <Location
@@ -1654,11 +1638,11 @@
                   moduleName = "papTermTwoCourseWorkDebug"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Charlie/Documents/openFrameworks/apps/myApps/papTermTwoCourseWork/src/AI/Lookahead.cpp"
-                  timestampString = "479401148.004923"
+                  timestampString = "479402333.30248"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "289"
-                  endingLineNumber = "289"
+                  startingLineNumber = "294"
+                  endingLineNumber = "294"
                   offsetFromSymbolStart = "1934">
                </Location>
             </Locations>
@@ -1687,11 +1671,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/AI/Lookahead.cpp"
-            timestampString = "479400612.51937"
+            timestampString = "479402174.875173"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "264"
-            endingLineNumber = "264"
+            startingLineNumber = "269"
+            endingLineNumber = "269"
             landmarkName = "Lookahead::randomPlayOutFromHere()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1911,22 +1895,6 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/AI/Lookahead.cpp"
-            timestampString = "479398988.61728"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "119"
-            endingLineNumber = "119"
-            landmarkName = "Lookahead::generateChildren()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "src/AI/Lookahead.cpp"
             timestampString = "479399018.798502"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
@@ -1943,27 +1911,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/AI/Lookahead.cpp"
-            timestampString = "479399137.00846"
+            timestampString = "479402174.875173"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "120"
-            endingLineNumber = "120"
-            landmarkName = "Lookahead::generateChildren()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "src/AI/Lookahead.cpp"
-            timestampString = "479400612.51937"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "198"
-            endingLineNumber = "198"
+            startingLineNumber = "203"
+            endingLineNumber = "203"
             landmarkName = "Lookahead::checkTerminality()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1975,11 +1927,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/AI/Lookahead.cpp"
-            timestampString = "479400612.51937"
+            timestampString = "479402174.875173"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "247"
-            endingLineNumber = "247"
+            startingLineNumber = "252"
+            endingLineNumber = "252"
             landmarkName = "Lookahead::randomPlayOutFromHere()"
             landmarkType = "5">
          </BreakpointContent>

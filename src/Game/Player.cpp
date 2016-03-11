@@ -73,7 +73,8 @@ AIPlayer::AIPlayer( const AIPlayer &player): Player(true)
     imgBank = player.getImageBank();
     for(GamePiecePtr bankPiece : player.getBankConst())
     {
-        assert(bankPiece);
+        //assert(bankPiece);
+        if(!bankPiece) continue;
         int pieceX = bankPiece->getX();
         int pieceY = bankPiece->getY();
         PieceType type = bankPiece->getType();
@@ -108,7 +109,8 @@ HumanPlayer::HumanPlayer(const HumanPlayer &player): Player(false)
     imgBank = player.getImageBank();
     for(GamePiecePtr bankPiece : player.getBankConst())
     {
-        assert(bankPiece);
+        //assert(bankPiece);
+        if (!bankPiece) continue;
         int pieceX = bankPiece->getX();
         int pieceY = bankPiece->getY();
         PieceType type = bankPiece->getType();

@@ -116,11 +116,14 @@ vector<Lookahead> Lookahead::generateChildren()
             Player* cloneOf1 = player1->clonePlayer();
             Player* cloneOf2 = player2->clonePlayer();
             vector<GamePiecePtr> copyBoard = copyGameBoard(gameboard, cloneOf1, cloneOf2);
-            simulateDroppedPiece(copyBoard, cloneOf1->getBankRef()[i], cloneOf1, boardPiece->getX(), boardPiece->getY());
-            assert(cloneOf1);
-            assert(cloneOf2);
-            assert(copyBoard.size()==12);
-            returnChildren.push_back(Lookahead(copyBoard, cloneOf1, cloneOf2, this, depthLevel+1));
+            if(cloneOf1->getBankRef().size() > i)
+            {
+                simulateDroppedPiece(copyBoard, cloneOf1->getBankRef()[i], cloneOf1, boardPiece->getX(), boardPiece->getY());
+                assert(cloneOf1);
+                assert(cloneOf2);
+                assert(copyBoard.size()==12);
+                returnChildren.push_back(Lookahead(copyBoard, cloneOf1, cloneOf2, this, depthLevel+1));
+            }
         }
         
     }
@@ -149,8 +152,10 @@ void Lookahead::simulateDroppedPiece(vector<GamePiecePtr> &board, GamePiecePtr p
     int removeX = piece->getX();
     int removeY = piece->getY();
     vector<shared_ptr<GamePiece>>& bank = owner->getBankRef();
+    int currBankSize = bank.size();
     bank.erase( std::remove_if(bank.begin(), bank.end(), [removeX,removeY](GamePiecePtr thisPiece)
                                { return thisPiece->getX() == removeX && thisPiece->getY() == removeY; }) );
+    assert(bank.size() == currBankSize-1);
     
 }
 
