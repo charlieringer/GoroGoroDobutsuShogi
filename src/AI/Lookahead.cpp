@@ -12,6 +12,7 @@
 #include "GiraffePiece.hpp"
 #include "ElephantPiece.hpp"
 #include "ChickPiece.hpp"
+#include <thread>
 
 Lookahead::Lookahead(vector<GamePiecePtr>& _gameboard, Player* _player1, Player* _player2, Lookahead* _parent, int _depthLevel): parent(_parent), gameboard(_gameboard), player1(_player1), player2(_player2), depthLevel(_depthLevel)
 {
@@ -234,8 +235,14 @@ vector<GamePiecePtr> Lookahead::copyGameBoard(vector<GamePiecePtr> initalBoard, 
     return returnBoard;
 }
 
-void Lookahead::randomPlayOutFromHere()
+void Lookahead::randomPlayOut()
 {
+    if (checkTerminality())
+    {
+        wins++;
+        parent->addLoss();
+        return;
+    }
     //We randomly playout till we reach a terminal state
     bool terminalStateFound = false;
     
@@ -246,12 +253,11 @@ void Lookahead::randomPlayOutFromHere()
     //Of which we are selecting a random one
     if(playOutChildren.size() == 0) return;
     int randomIndex = rand()%playOutChildren.size();
-    
     if(playOutChildren[randomIndex].checkTerminality())
     {
         games++;
-        losses++;
-        parent->addWin();
+        wins++;
+        parent->addLoss();
         return;
     }
     
@@ -281,7 +287,7 @@ void Lookahead::randomPlayOutFromHere()
             terminalStateFound = true;
         } else {
             vector<Lookahead> playOutChildren = evaluatedMoves[evaluatedMoves.size()-1].generateChildren();
-            if (evaluatedMoves[evaluatedMoves.size()-1].getDepth() > 78)
+            if (evaluatedMoves[evaluatedMoves.size()-1].getDepth() > 16) //78
             {
                 games++;
                return;
@@ -293,4 +299,17 @@ void Lookahead::randomPlayOutFromHere()
     
 }
 
+void Lookahead::playOutNGames(int n)
+{
+//    vector<std::thread> playOutThreads;
+//    for(int i = 0; i < n; i++)
+//    {
+//       // playOutThreads.push_back(std::thread( &Lookahead::randomPlayOut(), this));
+//        randomPlayOut();
+//    }
+//    for (auto &thread : playOutThreads)
+//    {
+//        thread.join();
+//    }
+}
 

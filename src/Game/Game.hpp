@@ -40,8 +40,8 @@ private:
     
     void movePiece(GamePiecePtr selectedPiece, int x, int y);
     void promotePiece(GamePiecePtr piece);
-    void handleDroppedPiece(int x,int y);
-    bool playersTurn = false;
+    bool handleDroppedPiece(int x,int y);
+    bool playersTurn = true;
     
 public:
     Game(State& _state, shared_ptr<ImageBank> _imgBank);

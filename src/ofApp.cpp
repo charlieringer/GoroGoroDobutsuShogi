@@ -12,8 +12,8 @@ void ofApp::update(){
         case(FRONTEND):
             break;
         case(INGAME):
+            //Takes the AIs turn
             game.takeAITurn();
-            game.checkEnd();
             break;
         case(GAMEOVERWIN):
             break;
@@ -27,6 +27,7 @@ void ofApp::draw(){
     switch(state)
     {
         case(FRONTEND):
+            //
             frontend.drawFrontend();
             break;
         case(INGAME):

@@ -63,9 +63,10 @@ public:
     vector<GamePiecePtr> getBoard(){ return gameboard;};
     Lookahead* getParent(){ return parent;};
     
-    void randomPlayOutFromHere();
+    void randomPlayOut();
     vector<Lookahead> generateChildren();
     vector<Lookahead>& getChildren(){ return children;};
     void setChildren(vector<Lookahead> _children){children = _children;};
+    void playOutNGames(int n);
 };
 #endif /* Move_hpp */

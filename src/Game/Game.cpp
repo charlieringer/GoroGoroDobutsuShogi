@@ -62,6 +62,7 @@ void Game::drawGame()
 void Game::takeAITurn()
 {
     if(playersTurn) return;
+    checkEnd();
     Lookahead stateFromAI = brain.getNextMove(gameboard, ai, player);
     gameboard.clear();
     vector<GamePiecePtr> aiBoard = stateFromAI.getBoard();
@@ -119,19 +120,22 @@ void Game::takeAITurn()
         
     }
     playersTurn = true;
+    checkEnd();
 }
 
 void Game::handlePlayerClick(int x, int y)
 {
     if(!playersTurn) return;
-    if (playerSelectedPiece != NULL)
+    if (playerSelectedPiece != nullptr)
     {
         int convertedX = (int)floor((x-xOffset)/pieceWidth+1)-1;
         int convertedY = (int)floor((y-yOffset)/pieceHeight+1)-1;
         if ((playerSelectedPiece->getY() == 5||playerSelectedPiece->getY() == 4) && convertedY >= 0 && convertedY < 4)
         {
-            handleDroppedPiece(convertedX,convertedY);
-            playersTurn = false;
+            bool dropped = handleDroppedPiece(convertedX,convertedY);
+            if(dropped)
+                playerSelectedPiece = nullptr;
+                playersTurn = false;
             return;
         }
         //See if we have clicked on a piece we can move/drop
@@ -149,7 +153,8 @@ void Game::handlePlayerClick(int x, int y)
                 }
             }
             movePiece(playerSelectedPiece, convertedX, convertedY);
-            playerSelectedPiece = NULL;
+            playerSelectedPiece = nullptr
+            ;
             playersTurn = false;
         }
         
@@ -223,12 +228,17 @@ void Game::movePiece(GamePiecePtr selectedPiece, int x, int y)
     }
 }
 
-void Game::handleDroppedPiece(int x,int y)
+bool Game::handleDroppedPiece(int x,int y)
 {
     for(GamePiecePtr &piece : gameboard)
     {
-        if(piece->getX() == x && piece->getY() == y && piece->getType() != PieceType::BLANK) return;
-        if(piece->getOwner() == player) return;
+        if(piece->getX() == x && piece->getY() == y && piece->getType() != PieceType::BLANK) return false;
+        if(piece->getX() == x && piece->getY() == y && piece->getOwner() == player)
+        {
+            playerSelectedPiece = piece;
+            return false;
+  
+        }
     }
     
     gameboard.erase(
@@ -250,6 +260,7 @@ void Game::handleDroppedPiece(int x,int y)
     bank.erase( std::remove_if(bank.begin(), bank.end(), [removeX,removeY](GamePiecePtr thisPiece)
     { return thisPiece->getX() == removeX && thisPiece->getY() == removeY; }) );
     playerSelectedPiece = NULL;
+    return true;
                         
 }
 

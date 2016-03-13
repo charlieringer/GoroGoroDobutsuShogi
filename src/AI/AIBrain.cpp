@@ -10,6 +10,11 @@
 
 AIBrain::AIBrain(){};
 
+void AIBrain::playOutGameWith(Lookahead& current)
+{
+    current.randomPlayOut();
+}
+
 Lookahead AIBrain::getNextMove(vector<GamePiecePtr>& gameBoard, Player* p1, Player* p2)
 {
     Lookahead currentState = Lookahead(gameBoard, p1, p2);
@@ -18,14 +23,20 @@ Lookahead AIBrain::getNextMove(vector<GamePiecePtr>& gameBoard, Player* p1, Play
 
     for (auto& child : potentialMoves)
     {
+        if (child.terminal()) return child;
+        vector<std::thread> playOutThreads;
         for(int i = 0; i < 50; i++)
         {
-            child.randomPlayOutFromHere();
+            playOutThreads.push_back(std::thread( &AIBrain::playOutGameWith, this, std::ref(child)));
+        }
+        for (auto &thread : playOutThreads)
+        {
+            thread.join();
         }
     }
     
     int nodesExplored = 0;
-    while(nodesExplored < 10){
+    while(nodesExplored < 100){
         //Increment the number of nodes explored
         nodesExplored++;
         
@@ -53,7 +64,7 @@ Lookahead AIBrain::getNextMove(vector<GamePiecePtr>& gameBoard, Player* p1, Play
                 float wins = bestChild->getChildren()[i].getWins();
                 float score;
                 if(wins == 0 && losses == 0)
-                    score = 0.0;
+                    score = 100.0;
                 else
                     score = 100*(wins/(losses+wins));
                 if (score > bestScore){
@@ -61,22 +72,30 @@ Lookahead AIBrain::getNextMove(vector<GamePiecePtr>& gameBoard, Player* p1, Play
                     bestIndex = i;
                 }
             }
+            bestChild = &bestChild->getChildren()[bestIndex];
             assert(bestScore!=-1);
             assert(bestIndex!=-1);
-            bestChild = &bestChild->getChildren()[bestIndex];
         }
+        
         assert(bestScore!=-1);
         assert(bestIndex!=-1);
         
         //Once we have found the best move we generate it's children
         assert(bestChild->getParent());
         vector<Lookahead> generatedMoves = bestChild->generateChildren();
+        //bestChild->generateChildren();
         bestChild->setChildren(generatedMoves);
         //And experiement with them
         for (auto& child : generatedMoves){
-            if (child.checkTerminality())continue;
-            for(int i = 0; i < 50; i++){
-                child.randomPlayOutFromHere();
+
+            vector<std::thread> playOutThreads;
+            for(int i = 0; i < 50; i++)
+            {
+                playOutThreads.push_back(std::thread( &AIBrain::playOutGameWith, this, std::ref(child)));
+            }
+            for (auto &thread : playOutThreads)
+            {
+                thread.join();
             }
         }
     }

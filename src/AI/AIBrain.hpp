@@ -22,6 +22,7 @@ private:
 public:
     AIBrain();
     Lookahead getNextMove(vector<GamePiecePtr>& gameBoard, Player* p1, Player* p2);
+    void playOutGameWith(Lookahead& current);
 };
 
 #endif /* AIBrain_hpp */
