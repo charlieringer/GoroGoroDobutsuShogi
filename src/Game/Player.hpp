@@ -38,7 +38,7 @@ public:
     vector<shared_ptr<GamePiece>> getBankConst() const { return bank;};
     virtual void addToBank(PieceType type);
     void clearBank(){ bank.clear();};
-    virtual Player* clonePlayer() = 0;
+    virtual shared_ptr<Player> clonePlayer() = 0;
 };
 
 class HumanPlayer: public Player
@@ -50,7 +50,7 @@ public:
     HumanPlayer( const HumanPlayer &HumanPlayer);
     void addToBank(PieceType type);
     bool isAI(){ return ai; };
-    virtual Player* clonePlayer();
+    virtual shared_ptr<Player>  clonePlayer();
     
     
 };
@@ -62,7 +62,7 @@ public:
     AIPlayer( const AIPlayer &player);
     void addToBank(PieceType type);
     bool isAI(){ return ai; };
-    virtual Player* clonePlayer();
+    virtual shared_ptr<Player> clonePlayer();
     
 };
 

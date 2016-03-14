@@ -92,10 +92,13 @@ AIPlayer::AIPlayer( const AIPlayer &player): Player(true)
     }
 }
 
-Player* AIPlayer::clonePlayer()
+shared_ptr<Player> AIPlayer::clonePlayer()
 {
-    Player* clone = new AIPlayer(*this);
+    shared_ptr<Player> clone = make_shared<AIPlayer>(*this);
     return clone;
+    
+    //Player* clone = new AIPlayer(*this);
+   // return clone;
 }
 
 
@@ -128,8 +131,8 @@ HumanPlayer::HumanPlayer(const HumanPlayer &player): Player(false)
     }
 }
 
-Player* HumanPlayer::clonePlayer()
+shared_ptr<Player> HumanPlayer::clonePlayer()
 {
-    Player* clone = new HumanPlayer(*this);
+    shared_ptr<Player> clone = make_shared<HumanPlayer>(*this);
     return clone;
 }

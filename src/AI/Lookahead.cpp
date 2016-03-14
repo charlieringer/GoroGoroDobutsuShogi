@@ -14,7 +14,7 @@
 #include "ChickPiece.hpp"
 #include <thread>
 
-Lookahead::Lookahead(vector<GamePiecePtr>& _gameboard, Player* _player1, Player* _player2, Lookahead* _parent, int _depthLevel): parent(_parent), gameboard(_gameboard), player1(_player1), player2(_player2), depthLevel(_depthLevel)
+Lookahead::Lookahead(vector<GamePiecePtr>& _gameboard, shared_ptr<Player> _player1, shared_ptr<Player> _player2, Lookahead* _parent, int _depthLevel): parent(_parent), gameboard(_gameboard), player1(_player1), player2(_player2), depthLevel(_depthLevel)
 {
     assert(_gameboard.size()==12);
     isTerminal = checkTerminality();
@@ -42,7 +42,7 @@ vector<Lookahead> Lookahead::generateChildren()
     for (int i = 0; i < gameboard.size(); i++)
     {
         assert(player1);
-        if(gameboard[i]->getOwner() == player1)
+        if(gameboard[i]->getOwner() == player1.get())
         {
             GamePiecePtr movingPiece = gameboard[i];
             int thisX = movingPiece->getX();
@@ -54,13 +54,13 @@ vector<Lookahead> Lookahead::generateChildren()
                 int targetX = targetPosPiece->getX();
                 int targetY = targetPosPiece->getY();
                 
-                if(targetPosPiece->getOwner() == player1) continue;
+                if(targetPosPiece->getOwner() == player1.get()) continue;
                 else if(!movingPiece->canMove(targetX,targetY)) continue;
                 
                 else if (targetPosPiece->getType() == PieceType::BLANK)
                 {
-                    Player* cloneOf1 = player1->clonePlayer();
-                    Player* cloneOf2 = player2->clonePlayer();
+                    shared_ptr<Player> cloneOf1 = player1->clonePlayer();
+                    shared_ptr<Player> cloneOf2 = player2->clonePlayer();
                     vector<GamePiecePtr> boardClone = copyGameBoard(gameboard, cloneOf1, cloneOf2);
                     GamePiecePtr clonedCurrentPiece = boardClone[i];
                     GamePiecePtr clonedTargetPiece = boardClone[j];
@@ -80,8 +80,8 @@ vector<Lookahead> Lookahead::generateChildren()
                     returnChildren.push_back(Lookahead(boardClone, cloneOf2, cloneOf1, this, depthLevel+1));
                 } else {
                     //Remove captured piece and replace capturing piece with blank piece.
-                    Player* cloneOf1 = player1->clonePlayer();
-                    Player* cloneOf2 = player2->clonePlayer();
+                    shared_ptr<Player> cloneOf1 = player1->clonePlayer();
+                    shared_ptr<Player> cloneOf2 = player2->clonePlayer();
                     vector<GamePiecePtr> boardClone = copyGameBoard(gameboard, cloneOf1, cloneOf2);
                     GamePiecePtr clonedCurrentPiece = boardClone[i];
                     GamePiecePtr clonedTargetPiece = boardClone[j];
@@ -114,8 +114,8 @@ vector<Lookahead> Lookahead::generateChildren()
         for(GamePiecePtr& boardPiece : gameboard)
         {
             if (boardPiece->getType() != PieceType::BLANK) continue;
-            Player* cloneOf1 = player1->clonePlayer();
-            Player* cloneOf2 = player2->clonePlayer();
+            shared_ptr<Player> cloneOf1 = player1->clonePlayer();
+            shared_ptr<Player> cloneOf2 = player2->clonePlayer();
             vector<GamePiecePtr> copyBoard = copyGameBoard(gameboard, cloneOf1, cloneOf2);
             if(cloneOf1->getBankRef().size() > i)
             {
@@ -131,7 +131,7 @@ vector<Lookahead> Lookahead::generateChildren()
     return returnChildren;
 }
 
-void Lookahead::simulateDroppedPiece(vector<GamePiecePtr> &board, GamePiecePtr piece, Player* owner, int x,int y)
+void Lookahead::simulateDroppedPiece(vector<GamePiecePtr> &board, GamePiecePtr piece, shared_ptr<Player> owner, int x,int y)
 {
     if(!piece) return;
     assert(board.size()==12);
@@ -142,11 +142,11 @@ void Lookahead::simulateDroppedPiece(vector<GamePiecePtr> &board, GamePiecePtr p
                 );
     assert(board.size()==11);
     if(piece->getType() == PieceType::CHICK)
-        board.push_back(make_shared<ChickPiece>(x, y, owner));
+        board.push_back(make_shared<ChickPiece>(x, y, owner.get()));
     else if(piece->getType() == PieceType::GIRAFFE)
-        board.push_back(make_shared<GiraffePiece>(x, y, owner));
+        board.push_back(make_shared<GiraffePiece>(x, y, owner.get()));
     else if(piece->getType() == PieceType::ELEPHANT)
-        board.push_back(make_shared<ElephantPiece>(x, y, owner));
+        board.push_back(make_shared<ElephantPiece>(x, y, owner.get()));
     else
         board.push_back(make_shared<BlankPiece>(x,y));
     assert(board.size()==12);
@@ -160,7 +160,7 @@ void Lookahead::simulateDroppedPiece(vector<GamePiecePtr> &board, GamePiecePtr p
     
 }
 
-void Lookahead::simulatePromotion(vector<GamePiecePtr> &board, GamePiecePtr piece, Player* owner)
+void Lookahead::simulatePromotion(vector<GamePiecePtr> &board, GamePiecePtr piece, shared_ptr<Player> owner)
 {
     //Turns a piece into a hen
     int x = piece->getX();
@@ -170,7 +170,7 @@ void Lookahead::simulatePromotion(vector<GamePiecePtr> &board, GamePiecePtr piec
                                    [x,y](GamePiecePtr thisPiece)
                                    { return thisPiece->getX() == x && thisPiece->getY() == y; })
                     );
-    board.push_back(make_shared<HenPiece>(x,y, owner));
+    board.push_back(make_shared<HenPiece>(x,y, owner.get()));
 }
 
 //This checks whether a lookahead is terminal or not
@@ -185,7 +185,7 @@ bool Lookahead::checkTerminality()
         {
             if(gamePiece->getType() == PieceType::LION)
             {
-                if (gamePiece->getOwner() == player2)
+                if (gamePiece->getOwner() == player2.get())
                 {
                     player2HasLion = true;
                     if ((gamePiece->getY() == 0 && !(gamePiece->getOwner()->isAI())) ||
@@ -193,7 +193,7 @@ bool Lookahead::checkTerminality()
                     {
                         return true;
                     }
-                } else if (gamePiece->getOwner() == player1)
+                } else if (gamePiece->getOwner() == player1.get())
                 {
                     player1HasLion = true;
                 }
@@ -213,7 +213,7 @@ bool Lookahead::checkTerminality()
 }
 
 //This just copies a game board and returns it (ready for experiementation)
-vector<GamePiecePtr> Lookahead::copyGameBoard(vector<GamePiecePtr> initalBoard, Player* p1, Player* p2)
+vector<GamePiecePtr> Lookahead::copyGameBoard(vector<GamePiecePtr> initalBoard, shared_ptr<Player> p1, shared_ptr<Player> p2)
 {
     vector<GamePiecePtr> returnBoard;
     
@@ -224,9 +224,9 @@ vector<GamePiecePtr> Lookahead::copyGameBoard(vector<GamePiecePtr> initalBoard, 
         {
             if(newPiece->getOwner()->isAI() == p1->isAI())
             {
-                newPiece->setOwner(p1);
+                newPiece->setOwner(p1.get());
             } else {
-                newPiece->setOwner(p2);
+                newPiece->setOwner(p2.get());
             }
         }
         returnBoard.push_back(newPiece);
@@ -239,6 +239,7 @@ void Lookahead::randomPlayOut()
 {
     if (checkTerminality())
     {
+        games++;
         wins++;
         parent->addLoss();
         return;
@@ -298,18 +299,3 @@ void Lookahead::randomPlayOut()
     }
     
 }
-
-void Lookahead::playOutNGames(int n)
-{
-//    vector<std::thread> playOutThreads;
-//    for(int i = 0; i < n; i++)
-//    {
-//       // playOutThreads.push_back(std::thread( &Lookahead::randomPlayOut(), this));
-//        randomPlayOut();
-//    }
-//    for (auto &thread : playOutThreads)
-//    {
-//        thread.join();
-//    }
-}
-

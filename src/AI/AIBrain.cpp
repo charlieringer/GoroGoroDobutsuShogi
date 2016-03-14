@@ -18,13 +18,14 @@ void AIBrain::playOutGameWith(Lookahead& current)
 
 Lookahead AIBrain::getNextMove(vector<GamePiecePtr>& gameBoard, Player* p1, Player* p2)
 {
-    cout << "----- MAKING MOVE -----" << endl;
+    
 
     Lookahead currentState = Lookahead(gameBoard, p1, p2);
+    cout << "----- MAKING MOVE -----" << endl;
     
     vector<Lookahead> potentialMoves = currentState.getChildren();
 
-    int totalItters = 500;
+    int totalItters = 800;
     int nodesExplored = 0;
     
     while(nodesExplored < totalItters){
@@ -38,6 +39,8 @@ Lookahead AIBrain::getNextMove(vector<GamePiecePtr>& gameBoard, Player* p1, Play
         int bestIndex = -1;
         cout << "Level 0" << endl;
         for(int i = 0; i < potentialMoves.size(); i++){
+            if (potentialMoves[i].terminal())
+                return potentialMoves[i];
             cout << "Node " << i << endl;
             float constant = 1.0;
             float losses = potentialMoves[i].getLosses();
@@ -88,7 +91,6 @@ Lookahead AIBrain::getNextMove(vector<GamePiecePtr>& gameBoard, Player* p1, Play
         assert(bestIndex!=-1);
         
         //Once we have found the best move we generate it's children
-        assert(bestChild->getParent());
         vector<Lookahead> generatedMoves = bestChild->generateChildren();
         //bestChild->generateChildren();
         bestChild->setChildren(generatedMoves);

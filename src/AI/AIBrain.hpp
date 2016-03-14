@@ -17,7 +17,6 @@
 class AIBrain
 {
 private:
-    //Lookahead currentState;
     
 public:
     AIBrain();

@@ -9,8 +9,10 @@
 #include "Game.hpp"
 #include "Lookahead.hpp"
 
-Game::Game(State& _state, shared_ptr<ImageBank> _imgBank): xOffset(100), yOffset(160), pieceHeight(80), pieceWidth(80)
+Game::Game(State& _state, shared_ptr<ImageBank> _imgBank): xOffset(100), yOffset(170), pieceHeight(80), pieceWidth(80)
 {
+    bool fontLoaded = dispFont.load("CHOWFUN_.TTF", 42);
+    assert(fontLoaded);
     state = &_state;
     imgBank = _imgBank;
     background = imgBank->loadImage("Background.jpg");
@@ -32,7 +34,6 @@ Game::Game(State& _state, shared_ptr<ImageBank> _imgBank): xOffset(100), yOffset
     gameboard.push_back(make_shared<ElephantPiece>(0,3, player, imgBank));
     gameboard.push_back(make_shared<LionPiece>(1,3, player, imgBank));
     gameboard.push_back(make_shared<GiraffePiece>(2,3, player, imgBank));
-
 }
 
 Game::~Game()
@@ -44,6 +45,9 @@ Game::~Game()
 void Game::drawGame()
 {
     background->draw(0,0);
+    
+    if(playersTurn)
+        dispFont.drawString("Players Turn", 10, 100);
     
     for(GamePiecePtr &gamePiece : gameboard) gamePiece->drawPiece(xOffset, pieceWidth, yOffset, pieceHeight);
     
@@ -61,6 +65,11 @@ void Game::drawGame()
 
 void Game::takeAITurn()
 {
+    if (firstIt)
+    {
+        firstIt = false;
+        return;
+    }
     if(playersTurn) return;
     checkEnd();
     Lookahead stateFromAI = brain.getNextMove(gameboard, ai, player);
