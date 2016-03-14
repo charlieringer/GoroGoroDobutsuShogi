@@ -20,7 +20,7 @@ enum class PieceType { CHICK, ELEPHANT, GIRAFFE, LION, HEN, BLANK };
 class GamePiece
 {
 private:
-    ofImage* dispImage;
+    ofImage* dispImage = nullptr;
     
 protected:
     int x;

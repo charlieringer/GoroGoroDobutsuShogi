@@ -25,7 +25,9 @@ using namespace std;
 class Game
 {
 private:
+    
     ofImage* background;
+    ofImage* gameBackground;
     vector<GamePiecePtr> gameboard;
     GamePiecePtr playerSelectedPiece;
     shared_ptr<ImageBank> imgBank;

@@ -19,6 +19,7 @@ private:
     int y;
     ofImage* dispImage;
 public:
+    bool clicked();
     
 };
 

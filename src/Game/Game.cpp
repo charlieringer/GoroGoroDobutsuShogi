@@ -9,16 +9,17 @@
 #include "Game.hpp"
 #include "Lookahead.hpp"
 
-Game::Game(State& _state, shared_ptr<ImageBank> _imgBank): xOffset(100), yOffset(170), pieceHeight(80), pieceWidth(80)
+Game::Game(State& _state, shared_ptr<ImageBank> _imgBank): xOffset(100), yOffset(170), pieceHeight(80), pieceWidth(80), state(&_state), imgBank(_imgBank)
 {
+    //Lo
     bool fontLoaded = dispFont.load("CHOWFUN_.TTF", 42);
     assert(fontLoaded);
-    state = &_state;
-    imgBank = _imgBank;
-    background = imgBank->loadImage("Background.jpg");
+    background = imgBank->loadImage("blurredbackground.jpg");
+    gameBackground = imgBank->loadImage("gamebackground.jpg");
     player = new HumanPlayer(imgBank);
     ai = new AIPlayer(imgBank);
     
+    //This is the inital game board
     gameboard.push_back(make_shared<GiraffePiece>(0,0, ai, imgBank));
     gameboard.push_back(make_shared<LionPiece>(1,0, ai, imgBank));
     gameboard.push_back(make_shared<ElephantPiece>(2,0, ai, imgBank));
@@ -38,13 +39,16 @@ Game::Game(State& _state, shared_ptr<ImageBank> _imgBank): xOffset(100), yOffset
 
 Game::~Game()
 {
+    //Nearly everthing in game is either a value or a shared_ptr so this is all we need to delete
     delete player;
     delete ai;
 }
 
 void Game::drawGame()
 {
+    //This is the game background
     background->draw(0,0);
+    gameBackground->draw(xOffset,yOffset);
     
     if(playersTurn)
         dispFont.drawString("Players Turn", 10, 100);

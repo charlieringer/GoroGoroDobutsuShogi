@@ -12,7 +12,7 @@ Frontend::Frontend(State& _state, shared_ptr<ImageBank> _imgBank)
 {
     state = &_state;
     imgBank = _imgBank;
-    background = imgBank->loadImage("Background.jpg");
+    background = imgBank->loadImage("frontendbackground.jpg");
     title  = imgBank->loadImage("Title.png");
     playbutton  = imgBank->loadImage("play.png");
     

@@ -32,8 +32,6 @@ Lookahead::Lookahead(vector<GamePiecePtr>& _gameboard, Player* _player1, Player*
 
 Lookahead::~Lookahead()
 {
-   //delete player1;
-   //delete player2;
 }
 
 vector<Lookahead> Lookahead::generateChildren()

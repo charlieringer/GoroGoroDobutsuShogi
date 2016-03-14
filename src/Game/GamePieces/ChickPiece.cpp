@@ -12,6 +12,7 @@
 
 ChickPiece::ChickPiece(int x, int y, Player* _owner, shared_ptr<ImageBank> imgBank ): GamePiece(x,y,_owner)
 {
+    //Sometimes the imgBank is null (like in the AI lookahead where we do not bother with graphics)
     if (imgBank != NULL)
     {
         if(_owner->isAI()) setDisplayImage("ChickAI.png", imgBank);
@@ -22,6 +23,7 @@ ChickPiece::ChickPiece(int x, int y, Player* _owner, shared_ptr<ImageBank> imgBa
 
 bool ChickPiece::canMove(int newX, int newY)
 {
+    //Chicks can only move forward
     if(owner->isAI())
     {
         if (newY == y+1 && newY < 4 && newY!=y && newX == x )
@@ -39,5 +41,7 @@ bool ChickPiece::canMove(int newX, int newY)
 
  shared_ptr<GamePiece> ChickPiece::clone()
 {
+    //This just copies the piece and returns it as a GamePiece (not ChickPiece). Needed for the AI because we need
+    //to be able to get GamePiece Ptrs during lookahead.
     return make_shared<ChickPiece>(*this);
 }

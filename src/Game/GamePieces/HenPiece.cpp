@@ -11,6 +11,7 @@
 
 HenPiece::HenPiece(int x, int y, Player* _owner, shared_ptr<ImageBank> imgBank ): GamePiece(x,y,_owner)
 {
+    //Sometimes the imgBank is null (like in the AI lookahead where we do not bother with graphics)
     if (imgBank != NULL)
     {
         if(_owner->isAI()) setDisplayImage("hen2.png", imgBank);
@@ -18,6 +19,7 @@ HenPiece::HenPiece(int x, int y, Player* _owner, shared_ptr<ImageBank> imgBank )
     }
     type = PieceType::HEN;
 }
+
 
 bool HenPiece::canMove(int newX, int newY)
 {
@@ -52,5 +54,7 @@ bool HenPiece::canMove(int newX, int newY)
 
 shared_ptr<GamePiece> HenPiece::clone()
 {
+    //This just copies the piece and returns it as a GamePiece (not HenPiece). Needed for the AI because we need
+    //to be able to get GamePiece Ptrs during lookahead.
     return make_shared<HenPiece>(*this);
 }

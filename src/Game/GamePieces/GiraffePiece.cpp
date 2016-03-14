@@ -10,6 +10,7 @@
 
 GiraffePiece::GiraffePiece(int x, int y, Player* _owner, shared_ptr<ImageBank> imgBank ): GamePiece(x,y,_owner)
 {
+    //Sometimes the imgBank is null (like in the AI lookahead where we do not bother with graphics)
     if (imgBank != NULL)
     {
         if(_owner->isAI()) setDisplayImage("GiraffeAI.png", imgBank);
@@ -34,5 +35,7 @@ bool GiraffePiece::canMove(int newX, int newY)
 
 shared_ptr<GamePiece> GiraffePiece::clone()
 {
+    //This just copies the piece and returns it as a GamePiece (not GiraffePiece). Needed for the AI because we need
+    //to be able to get GamePiece Ptrs during lookahead.
     return make_shared<GiraffePiece>(*this);
 }

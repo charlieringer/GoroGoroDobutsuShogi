@@ -21,6 +21,7 @@ Lookahead AIBrain::getNextMove(vector<GamePiecePtr>& gameBoard, Player* p1, Play
     
 
     Lookahead currentState = Lookahead(gameBoard, p1, p2);
+    if (currentState.terminal()) return currentState;
     cout << "----- MAKING MOVE -----" << endl;
     
     vector<Lookahead> potentialMoves = currentState.getChildren();

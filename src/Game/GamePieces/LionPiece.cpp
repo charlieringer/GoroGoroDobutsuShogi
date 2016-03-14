@@ -11,6 +11,7 @@
 
 LionPiece::LionPiece(int x, int y, Player* _owner, shared_ptr<ImageBank> imgBank ): GamePiece(x,y,_owner)
 {
+    //Sometimes the imgBank is null (like in the AI lookahead where we do not bother with graphics)
     if (imgBank != NULL)
     {
         if(_owner->isAI()) setDisplayImage("LionAI.png", imgBank);
@@ -35,5 +36,7 @@ bool LionPiece::canMove(int newX, int newY)
 
 shared_ptr<GamePiece> LionPiece::clone()
 {
+    //This just copies the piece and returns it as a GamePiece (not Lion). Needed for the AI because we need
+    //to be able to get GamePiece Ptrs during lookahead.
     return make_shared<LionPiece>(*this);
 }
