@@ -25,13 +25,4 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
-    
-        State state = FRONTEND;
-        shared_ptr<ImageBank> imgBank = make_shared<ImageBank>();
-        Game game = Game(state, imgBank);
-        Frontend frontend = Frontend(state, imgBank);
-        GameOverWin gameOverWin = GameOverWin(imgBank);
-        GameOverLose gameOverLose = GameOverLose(imgBank);
-    
-		
 };

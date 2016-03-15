@@ -23,7 +23,9 @@ private:
     string id;
     ofImage* dispImage;
 public:
+    Button(){};
     Button(int _x, int _y, int _w, int _h, string ident, string imgPath, shared_ptr<ImageBank> imgBank);
+    void draw();
     bool clicked(int mX, int mY);
 };
 

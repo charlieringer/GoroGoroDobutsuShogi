@@ -12,8 +12,9 @@
 #include <stdio.h>
 #include "ofMain.h"
 #include "ImageBank.hpp"
+#include "GameState.hpp"
 
-class GameOver
+class GameOver: public GameState
 {
 private:
     
@@ -23,21 +24,25 @@ protected:
 
 public:
     GameOver(shared_ptr<ImageBank> _imgBank);
-    virtual void display();
+   // virtual void draw() = 0;
 };
 
 class GameOverWin: public GameOver
 {
 public:
     GameOverWin(shared_ptr<ImageBank> _imgBank);
-    void display();
+    virtual void update(){};
+    virtual void draw();
+    virtual void handleClick(int x, int y){};
 };
 
 class GameOverLose: public GameOver
 {
 public:
     GameOverLose(shared_ptr<ImageBank> _imgBank);
-    void display();
+    virtual void update(){};
+    virtual void draw();
+    virtual void handleClick(int x, int y){};
 };
 
 #endif /* GameOver_hpp */

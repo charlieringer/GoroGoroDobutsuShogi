@@ -2,44 +2,25 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+    
+    
+    shared_ptr<ImageBank> imgBank = make_shared<ImageBank>();
+    GameState::addGameState(new Frontend(imgBank));
+    GameState::addGameState(new Game(imgBank));
+    GameState::addGameState(new GameOverWin(imgBank));
+    GameState::addGameState(new GameOverLose(imgBank));
+    GameState::setState(0);
 
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    switch(state)
-    {
-        case(FRONTEND):
-            break;
-        case(INGAME):
-            //Takes the AIs turn
-            game.takeAITurn();
-            break;
-        case(GAMEOVERWIN):
-            break;
-        case(GAMEOVERLOSE):
-            break;
-    }
+    GameState::getCurrentState()->update();
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    switch(state)
-    {
-        case(FRONTEND):
-            //
-            frontend.drawFrontend();
-            break;
-        case(INGAME):
-            game.drawGame();
-            break;
-        case(GAMEOVERWIN):
-            gameOverWin.display();
-            break;
-        case(GAMEOVERLOSE):
-            gameOverLose.display();
-            break;
-    }
+    GameState::getCurrentState()->draw();
 }
 
 //--------------------------------------------------------------
@@ -64,22 +45,7 @@ void ofApp::mouseDragged(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-    switch(state)
-    {
-        case(FRONTEND):
-            frontend.handleClick();
-            state = INGAME;
-            break;
-        case(INGAME):
-            game.handlePlayerClick(x,y);
-            break;
-        case(GAMEOVERWIN):
-            break;
-        case(GAMEOVERLOSE):
-            break;
-    }
-    
-
+    GameState::getCurrentState()->handleClick(x,y);
 }
 
 //--------------------------------------------------------------

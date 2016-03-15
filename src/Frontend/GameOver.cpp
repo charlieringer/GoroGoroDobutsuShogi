@@ -14,14 +14,13 @@ GameOver::GameOver(shared_ptr<ImageBank> _imgBank)
     bool fontLoaded = dispFont.load("CHOWFUN_.TTF", 42);
     assert(fontLoaded);
 }
-void GameOver::display(){}
 
 GameOverWin::GameOverWin(shared_ptr<ImageBank> _imgBank): GameOver(_imgBank)
 {
     
 }
 
-void GameOverWin:: display()
+void GameOverWin::draw()
 {
     background->draw(0,0);
     dispFont.drawString("You won!", 100, 100);
@@ -32,7 +31,7 @@ GameOverLose::GameOverLose(shared_ptr<ImageBank> _imgBank): GameOver(_imgBank)
     
 }
 
-void GameOverLose:: display()
+void GameOverLose::draw()
 {
     background->draw(0,0);
     dispFont.drawString("You lost!", 100, 100);

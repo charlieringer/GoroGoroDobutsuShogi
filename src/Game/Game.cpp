@@ -9,7 +9,7 @@
 #include "Game.hpp"
 #include "Lookahead.hpp"
 
-Game::Game(State& _state, shared_ptr<ImageBank> _imgBank): xOffset(100), yOffset(170), pieceHeight(80), pieceWidth(80), state(&_state), imgBank(_imgBank)
+Game::Game(shared_ptr<ImageBank> _imgBank): xOffset(100), yOffset(170), pieceHeight(80), pieceWidth(80), imgBank(_imgBank)
 {
     //Lo
     bool fontLoaded = dispFont.load("CHOWFUN_.TTF", 42);
@@ -46,14 +46,16 @@ Game::~Game()
     delete brain;
 }
 
-void Game::drawGame()
+void Game::draw()
 {
     //This is the game background
     background->draw(0,0);
     gameBackground->draw(xOffset,yOffset);
     
     if(playersTurn)
-        dispFont.drawString("Players Turn", 10, 100);
+        dispFont.drawString("Your Turn", 50, 50);
+    else
+       dispFont.drawString("AI thinking...", 10, 50);
     
     for(GamePiecePtr &gamePiece : gameboard) gamePiece->drawPiece(xOffset, pieceWidth, yOffset, pieceHeight);
     
@@ -67,6 +69,11 @@ void Game::drawGame()
         ofFill();
         ofSetColor(255, 255, 255);
     }
+}
+
+void Game::update()
+{
+    takeAITurn();
 }
 
 void Game::takeAITurn()
@@ -142,7 +149,7 @@ void Game::takeAITurn()
 }
 
 
-void Game::handlePlayerClick(int x, int y)
+void Game::handleClick(int x, int y)
 {
     if(!playersTurn) return;
     if (playerSelectedPiece != nullptr)
@@ -309,7 +316,8 @@ void Game::checkEnd()
             playerHasLion = true;
             if (gamePiece->getY() == 0)
             {
-                *state = GAMEOVERWIN;
+                //Win
+                GameState::setState(2);
                 return;
             }
         }
@@ -318,19 +326,22 @@ void Game::checkEnd()
             aiHasLion = true;
             if (gamePiece->getY() == 3)
             {
-                *state = GAMEOVERLOSE;
+                //Lose
+                GameState::setState(3);
                 return;
             }
         }
     }
     if(!playerHasLion)
     {
-        *state = GAMEOVERLOSE;
+        //Lose
+        GameState::setState(3);
         return;
     }
     if(!aiHasLion)
     {
-        *state = GAMEOVERWIN;
+        //Win
+        GameState::setState(2);
         return;
     }
 }

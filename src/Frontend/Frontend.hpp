@@ -12,22 +12,24 @@
 #include <stdio.h>
 #include "ImageBank.hpp"
 #include "State.hpp"
+#include "Button.hpp"
+#include "GameState.hpp"
 
-
-class Frontend
+class Frontend: public GameState
 {
 private:
     ofImage* background;
     ofImage* title;
-    ofImage* playbutton;
+    //ofImage* playbutton;
+    Button play;
     shared_ptr<ImageBank> imgBank;
-    State* state;
     
 public:
-    Frontend(State& _state, shared_ptr<ImageBank> _imgBank);
+    Frontend(shared_ptr<ImageBank> _imgBank);
     Frontend( const Frontend& other);
-    void drawFrontend();
-    void handleClick();
+    virtual void update(){};
+    virtual void draw();
+    virtual void handleClick(int x, int y);
 };
 
 #endif /* Frontend_hpp */

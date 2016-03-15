@@ -20,9 +20,10 @@ using namespace std;
 #include "HenPiece.hpp"
 #include "State.hpp"
 #include "AIBrain.hpp"
+#include "GameState.hpp"
 
 
-class Game
+class Game: public GameState
 {
 private:
     
@@ -46,15 +47,14 @@ private:
     void promotePiece(GamePiecePtr piece);
     bool handleDroppedPiece(int x,int y);
     bool playersTurn = true;
-    bool firstIt = true;
     
 public:
-    Game(State& _state, shared_ptr<ImageBank> _imgBank);
+    Game(shared_ptr<ImageBank> _imgBank);
     ~Game();
     
-    
-    void drawGame();
-    void handlePlayerClick(int x, int y);
+    virtual void update();
+    virtual void draw();
+    virtual void handleClick(int x, int y);
     void checkEnd();
     void takeAITurn();
     
