@@ -13,21 +13,21 @@
 #include "ofMain.h"
 using namespace std;
 
+//State system heavily influenced from the example shooter code by Marco Gillies. https://github.com/marcogillies/ShooterInheritanceExample
+
 class GameState
 {
 private:
     //Private because they should NEVER be used
     GameState(const GameState &other);
-    GameState &operator=(const GameState &gs){
+    GameState &operator=(const GameState &state){
         return *this;
     }
     
 protected:
-    
     static vector<unique_ptr<GameState>> states;
     static int currentState;
-
-    
+    //This needs to be here for the derived classed
     GameState(){};
     
 public:

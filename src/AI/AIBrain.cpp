@@ -14,14 +14,10 @@ AIBrain::AIBrain()
 }
 
 
-
-
-
 void AIBrain::playOutGameWith(Lookahead& current)
 {
     current.randomPlayOut();
 }
-
 
 void AIBrain::startAI(vector<GamePiecePtr>& gameBoard, Player* p1, Player* p2)
 {
@@ -40,10 +36,6 @@ void AIBrain::getNextMoveFromMCTS(vector<GamePiecePtr>& gameBoard, Player* p1, P
     nextMove = mcts(gameBoard, p1, p2);
     threadDone = true;
 }
-
-
-
-
 
 Lookahead AIBrain::mcts(vector<GamePiecePtr>& gameBoard, Player* p1, Player* p2)
 {

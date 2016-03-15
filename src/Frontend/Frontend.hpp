@@ -19,8 +19,7 @@ class Frontend: public GameState
 {
 private:
     ofImage* background;
-    ofImage* title;
-    //ofImage* playbutton;
+    Button title;
     Button play;
     shared_ptr<ImageBank> imgBank;
     

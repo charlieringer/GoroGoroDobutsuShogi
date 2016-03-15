@@ -13,8 +13,7 @@ Frontend::Frontend(shared_ptr<ImageBank> _imgBank)
 {
     imgBank = _imgBank;
     background = imgBank->loadImage("frontendbackground.jpg");
-    title  = imgBank->loadImage("Title.png");
-   // playbutton  = imgBank->loadImage("play.png");
+    title  = Button(0,100, 100,100, "title", "Title.png", imgBank);
     play = Button(0, 300, 442, 94, "play", "play.png", imgBank);
     
 }
@@ -23,15 +22,14 @@ Frontend::Frontend(const Frontend& other)
 {
     imgBank = other.imgBank;
     background = imgBank->loadImage("Background.jpg");
-    title  = imgBank->loadImage("Title.png");
-    //playbutton  = imgBank->loadImage("play.png");
+    title  = Button(0,100, 100,100, "title", "Title.png", imgBank);
     play = Button(0, 300, 442, 94, "play", "play.png", imgBank);
 }
 
 void Frontend::draw()
 {
     background->draw(0,0);
-    title->draw(0,100);
+    title.draw();
     play.draw();
     //playbutton->draw(0,300);
 }
