@@ -18,6 +18,7 @@ Game::Game(State& _state, shared_ptr<ImageBank> _imgBank): xOffset(100), yOffset
     gameBackground = imgBank->loadImage("gamebackground.jpg");
     player = new HumanPlayer(imgBank);
     ai = new AIPlayer(imgBank);
+    brain = new AIBrain();
     
     //This is the inital game board
     gameboard.push_back(make_shared<GiraffePiece>(0,0, ai, imgBank));
@@ -42,6 +43,7 @@ Game::~Game()
     //Nearly everthing in game is either a value or a shared_ptr so this is all we need to delete
     delete player;
     delete ai;
+    delete brain;
 }
 
 void Game::drawGame()
@@ -69,60 +71,63 @@ void Game::drawGame()
 
 void Game::takeAITurn()
 {
-    if (firstIt)
-    {
-        firstIt = false;
-        return;
-    }
     if(playersTurn) return;
-    checkEnd();
-    Lookahead stateFromAI = brain.getNextMove(gameboard, ai, player);
-    gameboard.clear();
-    vector<GamePiecePtr> aiBoard = stateFromAI.getBoard();
-    for(auto piece : aiBoard)
+    
+    if(!aiStarted)
     {
-        int x = piece->getX();
-        int y = piece->getY();
-        PieceType type = piece->getType();
-        if(type == PieceType::BLANK)
+        aiStarted = true;
+        brain->startAI(gameboard, ai, player);
+        return;
+    } else if(brain->hasNextMove())
+    {
+        gameboard.clear();
+        Lookahead stateFromAI = brain->getMoveandReset();
+        vector<GamePiecePtr> aiBoard = stateFromAI.getBoard();
+        for(auto piece : aiBoard)
         {
-            gameboard.push_back(make_shared<BlankPiece>(x,y, imgBank));
-        } else if(piece->getOwner()->isAI())
-        {
-            if (type == PieceType::GIRAFFE)
-                gameboard.push_back(make_shared<GiraffePiece>(x,y, ai, imgBank));
-            else if (type == PieceType::LION)
-                gameboard.push_back(make_shared<LionPiece>(x,y, ai, imgBank));
-            else if (type == PieceType::ELEPHANT)
-                gameboard.push_back(make_shared<ElephantPiece>(x,y, ai, imgBank));
-            else if (type == PieceType::CHICK)
-                gameboard.push_back(make_shared<ChickPiece>(x,y, ai, imgBank));
-            else if (type == PieceType::HEN)
-                gameboard.push_back(make_shared<HenPiece>(x,y, ai, imgBank));
-        } else  if(!(piece->getOwner()->isAI()))
-        {
-            if (type == PieceType::GIRAFFE)
-                gameboard.push_back(make_shared<GiraffePiece>(x,y, player, imgBank));
-            else if (type == PieceType::LION)
-                gameboard.push_back(make_shared<LionPiece>(x,y, player, imgBank));
-            else if (type == PieceType::ELEPHANT)
-                gameboard.push_back(make_shared<ElephantPiece>(x,y, player, imgBank));
-            else if (type == PieceType::CHICK)
-                gameboard.push_back(make_shared<ChickPiece>(x,y, player, imgBank));
-            else if (type == PieceType::HEN)
-                gameboard.push_back(make_shared<HenPiece>(x,y, player, imgBank));
+            int x = piece->getX();
+            int y = piece->getY();
+            PieceType type = piece->getType();
+            if(type == PieceType::BLANK)
+            {
+                gameboard.push_back(make_shared<BlankPiece>(x,y, imgBank));
+            } else if(piece->getOwner()->isAI())
+            {
+                if (type == PieceType::GIRAFFE)
+                    gameboard.push_back(make_shared<GiraffePiece>(x,y, ai, imgBank));
+                else if (type == PieceType::LION)
+                    gameboard.push_back(make_shared<LionPiece>(x,y, ai, imgBank));
+                else if (type == PieceType::ELEPHANT)
+                    gameboard.push_back(make_shared<ElephantPiece>(x,y, ai, imgBank));
+                else if (type == PieceType::CHICK)
+                    gameboard.push_back(make_shared<ChickPiece>(x,y, ai, imgBank));
+                else if (type == PieceType::HEN)
+                    gameboard.push_back(make_shared<HenPiece>(x,y, ai, imgBank));
+            } else  if(!(piece->getOwner()->isAI()))
+            {
+                if (type == PieceType::GIRAFFE)
+                    gameboard.push_back(make_shared<GiraffePiece>(x,y, player, imgBank));
+                else if (type == PieceType::LION)
+                    gameboard.push_back(make_shared<LionPiece>(x,y, player, imgBank));
+                else if (type == PieceType::ELEPHANT)
+                    gameboard.push_back(make_shared<ElephantPiece>(x,y, player, imgBank));
+                else if (type == PieceType::CHICK)
+                    gameboard.push_back(make_shared<ChickPiece>(x,y, player, imgBank));
+                else if (type == PieceType::HEN)
+                    gameboard.push_back(make_shared<HenPiece>(x,y, player, imgBank));
+            }
         }
         player->clearBank();
         ai->clearBank();
-        
+    
         for(auto piece: stateFromAI.getPlayer1()->getBankRef())
         {
-           if (stateFromAI.getPlayer1()->isAI())
-               ai->addToBank(piece->getType());
+            if (stateFromAI.getPlayer1()->isAI())
+                ai->addToBank(piece->getType());
             else
                 player->addToBank(piece->getType());
         }
-        
+    
         for(auto piece: stateFromAI.getPlayer2()->getBankRef())
         {
             if (stateFromAI.getPlayer2()->isAI())
@@ -130,11 +135,12 @@ void Game::takeAITurn()
             else
                 player->addToBank(piece->getType());
         }
-        
+        playersTurn = true;
+        checkEnd();
+        aiStarted = false;
     }
-    playersTurn = true;
-    checkEnd();
 }
+
 
 void Game::handlePlayerClick(int x, int y)
 {

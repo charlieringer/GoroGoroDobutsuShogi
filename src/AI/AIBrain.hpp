@@ -17,11 +17,23 @@
 class AIBrain
 {
 private:
+    std::thread* aiThread;
+    bool threadDone = false;
+    bool aiStarted;
+    Lookahead nextMove;
+    void playOutGameWith(Lookahead& current);
+    Lookahead mcts(vector<GamePiecePtr>& gameBoard, Player* p1, Player* p2);
+    void getNextMoveFromMCTS(vector<GamePiecePtr>& gameBoard, Player* p1, Player* p2);
     
 public:
     AIBrain();
-    Lookahead getNextMove(vector<GamePiecePtr>& gameBoard, Player* p1, Player* p2);
-    void playOutGameWith(Lookahead& current);
+    void startAI(vector<GamePiecePtr>& gameBoard, Player* p1, Player* p2);
+    Lookahead getMoveandReset(){
+        aiStarted = false;
+        return nextMove;
+    };
+    bool hasNextMove(){ return threadDone;};
+    bool started(){ return aiStarted;};
 };
 
 #endif /* AIBrain_hpp */

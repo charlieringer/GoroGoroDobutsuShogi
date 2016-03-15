@@ -33,13 +33,14 @@ private:
     shared_ptr<ImageBank> imgBank;
     HumanPlayer* player;
     AIPlayer* ai;
-    AIBrain brain;
+    AIBrain* brain;
     int pieceWidth;
     int pieceHeight;
     int xOffset;
     int yOffset;
     ofTrueTypeFont dispFont;
     State* state;
+    bool aiStarted = false;
     
     void movePiece(GamePiecePtr selectedPiece, int x, int y);
     void promotePiece(GamePiecePtr piece);

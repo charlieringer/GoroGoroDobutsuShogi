@@ -47,6 +47,7 @@ private:
     }
     
 public:
+    Lookahead(){};
     Lookahead(vector<GamePiecePtr>& _gameboard, shared_ptr<Player> _player1, shared_ptr<Player> _player2, Lookahead* _parent, int _depthLevel);
     Lookahead(vector<GamePiecePtr>& _gameboard, Player* _player1, Player* _player2);
     ~Lookahead();

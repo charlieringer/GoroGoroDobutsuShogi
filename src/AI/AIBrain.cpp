@@ -9,17 +9,44 @@
 #include "AIBrain.hpp"
 #include <math.h>
 
-AIBrain::AIBrain(){};
+AIBrain::AIBrain()
+{
+}
+
+
+
+
 
 void AIBrain::playOutGameWith(Lookahead& current)
 {
     current.randomPlayOut();
 }
 
-Lookahead AIBrain::getNextMove(vector<GamePiecePtr>& gameBoard, Player* p1, Player* p2)
-{
-    
 
+void AIBrain::startAI(vector<GamePiecePtr>& gameBoard, Player* p1, Player* p2)
+{
+    if (!aiStarted)
+    {
+    aiStarted = true;
+    delete aiThread;
+    aiThread = new std::thread(&AIBrain::getNextMoveFromMCTS, this, std::ref(gameBoard), p1, p2);
+    aiThread->detach();
+    }
+}
+
+void AIBrain::getNextMoveFromMCTS(vector<GamePiecePtr>& gameBoard, Player* p1, Player* p2)
+{
+    threadDone = false;
+    nextMove = mcts(gameBoard, p1, p2);
+    threadDone = true;
+}
+
+
+
+
+
+Lookahead AIBrain::mcts(vector<GamePiecePtr>& gameBoard, Player* p1, Player* p2)
+{
     Lookahead currentState = Lookahead(gameBoard, p1, p2);
     if (currentState.terminal()) return currentState;
     cout << "----- MAKING MOVE -----" << endl;

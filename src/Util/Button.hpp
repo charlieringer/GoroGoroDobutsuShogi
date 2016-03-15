@@ -11,16 +11,20 @@
 
 #include <stdio.h>
 #include "ofMain.h"
+#include "ImageBank.hpp"
 
 class Button
 {
 private:
     int x;
     int y;
+    int h;
+    int w;
+    string id;
     ofImage* dispImage;
 public:
-    bool clicked();
-    
+    Button(int _x, int _y, int _w, int _h, string ident, string imgPath, shared_ptr<ImageBank> imgBank);
+    bool clicked(int mX, int mY);
 };
 
 #endif /* Button_hpp */
