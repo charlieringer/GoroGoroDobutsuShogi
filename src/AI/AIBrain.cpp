@@ -47,6 +47,7 @@ Lookahead AIBrain::mcts(vector<GamePiecePtr>& gameBoard, Player* p1, Player* p2)
 
     int totalItters = 800;
     int nodesExplored = 0;
+    float exploreConst = 1;
     
     while(nodesExplored < totalItters){
         nodesExplored++;
@@ -62,11 +63,13 @@ Lookahead AIBrain::mcts(vector<GamePiecePtr>& gameBoard, Player* p1, Player* p2)
             if (potentialMoves[i].terminal())
                 return potentialMoves[i];
             cout << "Node " << i << endl;
-            float constant = 1.0;
             float losses = potentialMoves[i].getLosses();
             float wins = potentialMoves[i].getWins();
             
-            float exploreRating = constant + sqrt(log(nodesExplored)/(losses+wins+0.1));
+            //UBT (Upper Confidence Bound 1 applied to trees) function for deterimining
+            //How much we want to explore vs exploit.
+            //Because we want to change things the constant is configurable.
+            float exploreRating = sqrt(exploreConst*log(nodesExplored)/(losses+wins+0.1));
             float score = 1.0;
             if (losses+wins > 0)
                 score = wins/(losses+wins);
@@ -88,11 +91,14 @@ Lookahead AIBrain::mcts(vector<GamePiecePtr>& gameBoard, Player* p1, Player* p2)
             bestScore = -1;
             bestIndex = -1;
             for(int i = 0; i < bestChild->getNumbChildren(); i++){
-                float constant = 1.0;
+                
                 float losses = bestChild->getChildren()[i].getLosses();
                 float wins = bestChild->getChildren()[i].getWins();
                 
-                float exploreRating = constant + sqrt(log(nodesExplored)/(losses+wins+0.1));
+                //UBT (Upper Confidence Bound 1 applied to trees) function for deterimining
+                //How much we want to explore vs exploit.
+                //Because we want to change things the constant is configurable.
+                float exploreRating = sqrt(exploreConst*log(nodesExplored)/(losses+wins+0.1));
                 float score = 1.0;
                 if (losses+wins > 0)
                     score = wins/(losses+wins);

@@ -13,8 +13,8 @@ GiraffePiece::GiraffePiece(int x, int y, Player* _owner, shared_ptr<ImageBank> i
     //Sometimes the imgBank is null (like in the AI lookahead where we do not bother with graphics)
     if (imgBank != NULL)
     {
-        if(_owner->isAI()) setDisplayImage("GiraffeAI.png", imgBank);
-        else setDisplayImage("GiraffePlayer.png", imgBank);
+        if(_owner->isAI()) setDisplayImage("Tiles/GiraffeAI.png", imgBank);
+        else setDisplayImage("Tiles/GiraffePlayer.png", imgBank);
     }
     type = PieceType::GIRAFFE;
 }

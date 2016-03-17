@@ -14,8 +14,8 @@ HenPiece::HenPiece(int x, int y, Player* _owner, shared_ptr<ImageBank> imgBank )
     //Sometimes the imgBank is null (like in the AI lookahead where we do not bother with graphics)
     if (imgBank != NULL)
     {
-        if(_owner->isAI()) setDisplayImage("hen2.png", imgBank);
-        else setDisplayImage("hen2.png", imgBank);
+        if(_owner->isAI()) setDisplayImage("Tiles/HenAI.png", imgBank);
+        else setDisplayImage("Tiles/HenPlayer.png", imgBank);
     }
     type = PieceType::HEN;
 }

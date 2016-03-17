@@ -14,8 +14,8 @@ LionPiece::LionPiece(int x, int y, Player* _owner, shared_ptr<ImageBank> imgBank
     //Sometimes the imgBank is null (like in the AI lookahead where we do not bother with graphics)
     if (imgBank != NULL)
     {
-        if(_owner->isAI()) setDisplayImage("LionAI.png", imgBank);
-        else setDisplayImage("LionPlayer.png", imgBank);
+        if(_owner->isAI()) setDisplayImage("Tiles/LionAI.png", imgBank);
+        else setDisplayImage("Tiles/LionPlayer.png", imgBank);
     }
     type = PieceType::LION;
     

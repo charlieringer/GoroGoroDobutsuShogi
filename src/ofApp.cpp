@@ -2,15 +2,13 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    
-    
     shared_ptr<ImageBank> imgBank = make_shared<ImageBank>();
     GameState::addGameState(new Frontend(imgBank));
+    GameState::addGameState(new AISettings(imgBank));
     GameState::addGameState(new Game(imgBank));
     GameState::addGameState(new GameOverWin(imgBank));
     GameState::addGameState(new GameOverLose(imgBank));
-    GameState::setState(0);
-
+    GameState::setState(FRONTEND);
 }
 
 //--------------------------------------------------------------

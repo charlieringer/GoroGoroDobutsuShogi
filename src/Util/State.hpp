@@ -10,13 +10,7 @@
 #define State_hpp
 
 #include <stdio.h>
-//Game State enum
-enum State
-{
-    FRONTEND, // 0
-    INGAME, // 1
-    GAMEOVERWIN, // 2
-    GAMEOVERLOSE, // 3
-};
+
+
 
 #endif /* State_hpp */

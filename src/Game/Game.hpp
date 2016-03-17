@@ -40,7 +40,6 @@ private:
     int xOffset;
     int yOffset;
     ofTrueTypeFont dispFont;
-    State* state;
     bool aiStarted = false;
     
     void movePiece(GamePiecePtr selectedPiece, int x, int y);

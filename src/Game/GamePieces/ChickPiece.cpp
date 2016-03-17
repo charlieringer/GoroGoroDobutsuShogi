@@ -15,8 +15,8 @@ ChickPiece::ChickPiece(int x, int y, Player* _owner, shared_ptr<ImageBank> imgBa
     //Sometimes the imgBank is null (like in the AI lookahead where we do not bother with graphics)
     if (imgBank != NULL)
     {
-        if(_owner->isAI()) setDisplayImage("ChickAI.png", imgBank);
-        else setDisplayImage("ChickPlayer.png", imgBank);
+        if(_owner->isAI()) setDisplayImage("Tiles/ChickAI.png", imgBank);
+        else setDisplayImage("Tiles/ChickPlayer.png", imgBank);
     }
     type = PieceType::CHICK;
 }

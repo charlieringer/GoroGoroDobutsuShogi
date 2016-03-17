@@ -14,8 +14,8 @@ ElephantPiece::ElephantPiece(int x, int y, Player* _owner, shared_ptr<ImageBank>
     //Sometimes the imgBank is null (like in the AI lookahead where we do not bother with graphics)
     if (imgBank != NULL)
     {
-        if(_owner->isAI()) setDisplayImage("ElephantAI.png", imgBank);
-        else setDisplayImage("ElephantPlayer.png", imgBank);
+        if(_owner->isAI()) setDisplayImage("Tiles/ElephantAI.png", imgBank);
+        else setDisplayImage("Tiles/ElephantPlayer.png", imgBank);
     }
     type = PieceType::ELEPHANT;
 }

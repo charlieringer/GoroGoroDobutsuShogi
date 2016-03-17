@@ -286,7 +286,8 @@ void Lookahead::randomPlayOut()
             terminalStateFound = true;
         } else {
             vector<Lookahead> playOutChildren = evaluatedMoves[evaluatedMoves.size()-1].generateChildren();
-            if (evaluatedMoves[evaluatedMoves.size()-1].getDepth() > 16) //78
+            //
+            if (evaluatedMoves[evaluatedMoves.size()-1].getDepth() > 78)
             {
                 games++;
                return;

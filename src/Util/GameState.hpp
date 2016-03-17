@@ -9,11 +9,18 @@
 #ifndef GameState_hpp
 #define GameState_hpp
 
+#define FRONTEND 0
+#define AISETTINGS 1
+#define GAME 2
+#define GAMEOVERLOSE 3
+#define GAMEOVERWIN 4
+
 #include <stdio.h>
 #include "ofMain.h"
 using namespace std;
 
-//State system heavily influenced from the example shooter code by Marco Gillies. https://github.com/marcogillies/ShooterInheritanceExample
+//State system heavily influenced from the example shooter code by Marco Gillies.
+//https://github.com/marcogillies/ShooterInheritanceExample
 
 class GameState
 {

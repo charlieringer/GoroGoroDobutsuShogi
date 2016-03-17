@@ -6,6 +6,7 @@
 #include "Frontend.hpp"
 #include "State.hpp"
 #include "GameOver.hpp"
+#include "AISettings.hpp"
 
 class ofApp : public ofBaseApp{
 

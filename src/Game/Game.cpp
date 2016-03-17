@@ -12,10 +12,10 @@
 Game::Game(shared_ptr<ImageBank> _imgBank): xOffset(100), yOffset(170), pieceHeight(80), pieceWidth(80), imgBank(_imgBank)
 {
     //Lo
-    bool fontLoaded = dispFont.load("CHOWFUN_.TTF", 42);
+    bool fontLoaded = dispFont.load("Fonts/CHOWFUN_.TTF", 42);
     assert(fontLoaded);
-    background = imgBank->loadImage("blurredbackground.jpg");
-    gameBackground = imgBank->loadImage("gamebackground.jpg");
+    background = imgBank->loadImage("Backgrounds/blurredbackground.jpg");
+    gameBackground = imgBank->loadImage("Backgrounds/gamebackground.jpg");
     player = new HumanPlayer(imgBank);
     ai = new AIPlayer(imgBank);
     brain = new AIBrain();

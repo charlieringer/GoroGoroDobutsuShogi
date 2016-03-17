@@ -21,6 +21,7 @@ private:
     ofImage* background;
     Button title;
     Button play;
+    Button aiSettings; 
     shared_ptr<ImageBank> imgBank;
     
 public:

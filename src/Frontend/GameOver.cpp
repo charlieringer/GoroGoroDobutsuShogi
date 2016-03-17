@@ -10,8 +10,8 @@
 
 GameOver::GameOver(shared_ptr<ImageBank> _imgBank)
 {
-    background = _imgBank->loadImage("frontendbackground.jpg");
-    bool fontLoaded = dispFont.load("CHOWFUN_.TTF", 42);
+    background = _imgBank->loadImage("Backgrounds/frontendbackground.jpg");
+    bool fontLoaded = dispFont.load("Fonts/CHOWFUN_.TTF", 42);
     assert(fontLoaded);
 }
 
