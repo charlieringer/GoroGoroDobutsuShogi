@@ -13,36 +13,39 @@
 #include "ofMain.h"
 #include "ImageBank.hpp"
 #include "GameState.hpp"
+#include "Button.hpp"
 
 class GameOver: public GameState
 {
 private:
+    Button playAgain;
+    Button mainMenu;
+    ofImage* background;
     
 protected:
-    ofImage* background;
     ofTrueTypeFont dispFont;
 
 public:
-    GameOver(shared_ptr<ImageBank> _imgBank);
-   // virtual void draw() = 0;
+    GameOver(shared_ptr<ImageBank>& _imgBank);
+    virtual void draw();
+    virtual void handleClick(int x, int y);
 };
 
 class GameOverWin: public GameOver
 {
 public:
-    GameOverWin(shared_ptr<ImageBank> _imgBank);
+    GameOverWin(shared_ptr<ImageBank>& _imgBank);
     virtual void update(){};
     virtual void draw();
-    virtual void handleClick(int x, int y){};
+    
 };
 
 class GameOverLose: public GameOver
 {
 public:
-    GameOverLose(shared_ptr<ImageBank> _imgBank);
+    GameOverLose(shared_ptr<ImageBank>& _imgBank);
     virtual void update(){};
     virtual void draw();
-    virtual void handleClick(int x, int y){};
 };
 
 #endif /* GameOver_hpp */

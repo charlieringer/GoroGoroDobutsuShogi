@@ -18,7 +18,6 @@ using namespace std;
 #include "BlankPiece.hpp"
 #include "ChickPiece.hpp"
 #include "HenPiece.hpp"
-#include "State.hpp"
 #include "AIBrain.hpp"
 #include "GameState.hpp"
 
@@ -46,6 +45,9 @@ private:
     void promotePiece(GamePiecePtr piece);
     bool handleDroppedPiece(int x,int y);
     bool playersTurn = true;
+    void reset();
+    void checkEnd();
+    void takeAITurn();
     
 public:
     Game(shared_ptr<ImageBank> _imgBank);
@@ -54,8 +56,8 @@ public:
     virtual void update();
     virtual void draw();
     virtual void handleClick(int x, int y);
-    void checkEnd();
-    void takeAITurn();
+    
+    
     
 };
 

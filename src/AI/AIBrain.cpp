@@ -7,10 +7,16 @@
 //
 
 #include "AIBrain.hpp"
+#include "AIValues.hpp"
 #include <math.h>
 
 AIBrain::AIBrain()
 {
+}
+
+AIBrain::~AIBrain()
+{
+    delete aiThread;
 }
 
 
@@ -45,9 +51,9 @@ Lookahead AIBrain::mcts(vector<GamePiecePtr>& gameBoard, Player* p1, Player* p2)
     
     vector<Lookahead> potentialMoves = currentState.getChildren();
 
-    int totalItters = 800;
+    int totalItters = aiData.numbItters;
     int nodesExplored = 0;
-    float exploreConst = 1;
+    float exploreConst = aiData.exploreConst;
     
     while(nodesExplored < totalItters){
         nodesExplored++;

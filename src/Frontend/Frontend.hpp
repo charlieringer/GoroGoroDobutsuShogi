@@ -11,7 +11,6 @@
 
 #include <stdio.h>
 #include "ImageBank.hpp"
-#include "State.hpp"
 #include "Button.hpp"
 #include "GameState.hpp"
 
@@ -21,7 +20,8 @@ private:
     ofImage* background;
     Button title;
     Button play;
-    Button aiSettings; 
+    Button aiSettings;
+    Button instructions;
     shared_ptr<ImageBank> imgBank;
     
 public:

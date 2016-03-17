@@ -7,6 +7,7 @@
 //
 
 #include "AISettings.hpp"
+//#include "AIValues.hpp"
 
 AISettings::AISettings(shared_ptr<ImageBank> imgBank)
 {

@@ -316,8 +316,8 @@ void Game::checkEnd()
             playerHasLion = true;
             if (gamePiece->getY() == 0)
             {
-                //Win
-                GameState::setState(2);
+                reset();
+                GameState::setState(GAMEOVERWIN);
                 return;
             }
         }
@@ -326,23 +326,45 @@ void Game::checkEnd()
             aiHasLion = true;
             if (gamePiece->getY() == 3)
             {
-                //Lose
-                GameState::setState(3);
+                reset();
+                GameState::setState(GAMEOVERLOSE);
                 return;
             }
         }
     }
     if(!playerHasLion)
     {
-        //Lose
-        GameState::setState(3);
+        reset();
+        GameState::setState(GAMEOVERLOSE);
         return;
     }
     if(!aiHasLion)
     {
-        //Win
-        GameState::setState(2);
+        reset();
+        GameState::setState(GAMEOVERWIN);
         return;
     }
+}
+
+void Game::reset()
+{
+    player->clearBank();
+    ai->clearBank();
+    gameboard.clear();
+    gameboard.push_back(make_shared<GiraffePiece>(0,0, ai, imgBank));
+    gameboard.push_back(make_shared<LionPiece>(1,0, ai, imgBank));
+    gameboard.push_back(make_shared<ElephantPiece>(2,0, ai, imgBank));
+    
+    gameboard.push_back(make_shared<BlankPiece>(0,1, imgBank));
+    gameboard.push_back(make_shared<ChickPiece>(1,1, ai, imgBank));
+    gameboard.push_back(make_shared<BlankPiece>(2,1, imgBank));
+    
+    gameboard.push_back(make_shared<BlankPiece>(0,2, imgBank));
+    gameboard.push_back(make_shared<ChickPiece>(1,2, player, imgBank));
+    gameboard.push_back(make_shared<BlankPiece>(2,2, imgBank));
+    
+    gameboard.push_back(make_shared<ElephantPiece>(0,3, player, imgBank));
+    gameboard.push_back(make_shared<LionPiece>(1,3, player, imgBank));
+    gameboard.push_back(make_shared<GiraffePiece>(2,3, player, imgBank));
 }
 

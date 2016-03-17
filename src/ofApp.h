@@ -4,9 +4,9 @@
 #include "ImageBank.hpp"
 #include "Game.hpp"
 #include "Frontend.hpp"
-#include "State.hpp"
 #include "GameOver.hpp"
 #include "AISettings.hpp"
+#include "Instructions.hpp"
 
 class ofApp : public ofBaseApp{
 

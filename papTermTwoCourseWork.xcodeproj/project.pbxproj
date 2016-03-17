@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		CB06F9171C987434006F6690 /* GameState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CB06F9151C987434006F6690 /* GameState.cpp */; settings = {ASSET_TAGS = (); }; };
 		CB06F91B1C99BBA5006F6690 /* AISettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CB06F9191C99BBA5006F6690 /* AISettings.cpp */; settings = {ASSET_TAGS = (); }; };
+		CB2D44A91C9AF72A00F91C3B /* Instructions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CB2D44A71C9AF72A00F91C3B /* Instructions.cpp */; settings = {ASSET_TAGS = (); }; };
 		CB3B408F1C8F454200D495CA /* Button.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CB3B406E1C8F454200D495CA /* Button.cpp */; settings = {ASSET_TAGS = (); }; };
 		CB3B40901C8F454200D495CA /* ImageBank.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CB3B40701C8F454200D495CA /* ImageBank.cpp */; settings = {ASSET_TAGS = (); }; };
 		CB3B40911C8F454200D495CA /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CB3B40741C8F454200D495CA /* Game.cpp */; settings = {ASSET_TAGS = (); }; };
@@ -63,11 +64,13 @@
 		CB06F9161C987434006F6690 /* GameState.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GameState.hpp; sourceTree = "<group>"; };
 		CB06F9191C99BBA5006F6690 /* AISettings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AISettings.cpp; sourceTree = "<group>"; };
 		CB06F91A1C99BBA5006F6690 /* AISettings.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AISettings.hpp; sourceTree = "<group>"; };
+		CB2D44A51C9ADEB600F91C3B /* AIValues.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AIValues.hpp; sourceTree = "<group>"; };
+		CB2D44A71C9AF72A00F91C3B /* Instructions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Instructions.cpp; sourceTree = "<group>"; };
+		CB2D44A81C9AF72A00F91C3B /* Instructions.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Instructions.hpp; sourceTree = "<group>"; };
 		CB3B406E1C8F454200D495CA /* Button.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Button.cpp; sourceTree = "<group>"; };
 		CB3B406F1C8F454200D495CA /* Button.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Button.hpp; sourceTree = "<group>"; };
 		CB3B40701C8F454200D495CA /* ImageBank.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImageBank.cpp; sourceTree = "<group>"; };
 		CB3B40711C8F454200D495CA /* ImageBank.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ImageBank.hpp; sourceTree = "<group>"; };
-		CB3B40721C8F454200D495CA /* State.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = State.hpp; sourceTree = "<group>"; };
 		CB3B40741C8F454200D495CA /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
 		CB3B40751C8F454200D495CA /* Game.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Game.hpp; sourceTree = "<group>"; };
 		CB3B40771C8F454200D495CA /* ChickPiece.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChickPiece.cpp; sourceTree = "<group>"; };
@@ -139,7 +142,6 @@
 				CB06F9161C987434006F6690 /* GameState.hpp */,
 				CB3B40701C8F454200D495CA /* ImageBank.cpp */,
 				CB3B40711C8F454200D495CA /* ImageBank.hpp */,
-				CB3B40721C8F454200D495CA /* State.hpp */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -186,6 +188,8 @@
 				CB3B40891C8F454200D495CA /* GameOver.hpp */,
 				CB06F9191C99BBA5006F6690 /* AISettings.cpp */,
 				CB06F91A1C99BBA5006F6690 /* AISettings.hpp */,
+				CB2D44A71C9AF72A00F91C3B /* Instructions.cpp */,
+				CB2D44A81C9AF72A00F91C3B /* Instructions.hpp */,
 			);
 			path = Frontend;
 			sourceTree = "<group>";
@@ -197,6 +201,7 @@
 				CB3B408C1C8F454200D495CA /* AIBrain.hpp */,
 				CB3B408D1C8F454200D495CA /* Lookahead.cpp */,
 				CB3B408E1C8F454200D495CA /* Lookahead.hpp */,
+				CB2D44A51C9ADEB600F91C3B /* AIValues.hpp */,
 			);
 			path = AI;
 			sourceTree = "<group>";
@@ -346,6 +351,7 @@
 				CB3B40911C8F454200D495CA /* Game.cpp in Sources */,
 				CB3B40981C8F454200D495CA /* Player.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
+				CB2D44A91C9AF72A00F91C3B /* Instructions.cpp in Sources */,
 				CB3B40951C8F454200D495CA /* GiraffePiece.cpp in Sources */,
 				CB3B409F1C8F45B600D495CA /* BlankPiece.cpp in Sources */,
 				CB3B40921C8F454200D495CA /* ChickPiece.cpp in Sources */,

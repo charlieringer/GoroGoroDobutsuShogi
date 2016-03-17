@@ -11,9 +11,10 @@
 
 #define FRONTEND 0
 #define AISETTINGS 1
-#define GAME 2
-#define GAMEOVERLOSE 3
-#define GAMEOVERWIN 4
+#define INSTRUCTIONS 2
+#define GAME 3
+#define GAMEOVERLOSE 4
+#define GAMEOVERWIN 5
 
 #include <stdio.h>
 #include "ofMain.h"

@@ -17,7 +17,7 @@
 class AIBrain
 {
 private:
-    std::thread* aiThread;
+    thread* aiThread;
     bool threadDone = false;
     bool aiStarted;
     Lookahead nextMove;
@@ -27,6 +27,7 @@ private:
     
 public:
     AIBrain();
+    ~AIBrain();
     void startAI(vector<GamePiecePtr>& gameBoard, Player* p1, Player* p2);
     Lookahead getMoveandReset(){
         aiStarted = false;

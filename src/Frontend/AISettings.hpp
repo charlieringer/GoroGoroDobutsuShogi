@@ -18,6 +18,7 @@ class AISettings: public GameState
 {
 private:
     Button back;
+    
 public:
     AISettings(shared_ptr<ImageBank> imgBank);
     virtual void update(){};
