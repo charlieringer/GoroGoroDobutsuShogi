@@ -25,6 +25,7 @@
 		CB3B409B1C8F454200D495CA /* AIBrain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CB3B408B1C8F454200D495CA /* AIBrain.cpp */; settings = {ASSET_TAGS = (); }; };
 		CB3B409C1C8F454200D495CA /* Lookahead.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CB3B408D1C8F454200D495CA /* Lookahead.cpp */; settings = {ASSET_TAGS = (); }; };
 		CB3B409F1C8F45B600D495CA /* BlankPiece.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CB3B409D1C8F45B600D495CA /* BlankPiece.cpp */; settings = {ASSET_TAGS = (); }; };
+		CBCD5BB51C9B42BF0055BC0F /* AIValues.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CBCD5BB31C9B42BF0055BC0F /* AIValues.cpp */; settings = {ASSET_TAGS = (); }; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4B69E1D0A3A1BDC003C02F2 /* main.cpp */; };
 		E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */; };
@@ -64,7 +65,6 @@
 		CB06F9161C987434006F6690 /* GameState.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GameState.hpp; sourceTree = "<group>"; };
 		CB06F9191C99BBA5006F6690 /* AISettings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AISettings.cpp; sourceTree = "<group>"; };
 		CB06F91A1C99BBA5006F6690 /* AISettings.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AISettings.hpp; sourceTree = "<group>"; };
-		CB2D44A51C9ADEB600F91C3B /* AIValues.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AIValues.hpp; sourceTree = "<group>"; };
 		CB2D44A71C9AF72A00F91C3B /* Instructions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Instructions.cpp; sourceTree = "<group>"; };
 		CB2D44A81C9AF72A00F91C3B /* Instructions.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Instructions.hpp; sourceTree = "<group>"; };
 		CB3B406E1C8F454200D495CA /* Button.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Button.cpp; sourceTree = "<group>"; };
@@ -97,6 +97,8 @@
 		CB3B408E1C8F454200D495CA /* Lookahead.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Lookahead.hpp; sourceTree = "<group>"; };
 		CB3B409D1C8F45B600D495CA /* BlankPiece.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BlankPiece.cpp; sourceTree = "<group>"; };
 		CB3B409E1C8F45B600D495CA /* BlankPiece.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BlankPiece.hpp; sourceTree = "<group>"; };
+		CBCD5BB31C9B42BF0055BC0F /* AIValues.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AIValues.cpp; sourceTree = "<group>"; };
+		CBCD5BB41C9B42BF0055BC0F /* AIValues.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AIValues.hpp; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E4B69B5B0A3A1756003C02F2 /* papTermTwoCourseWorkDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = papTermTwoCourseWorkDebug.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4B69E1D0A3A1BDC003C02F2 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = src/main.cpp; sourceTree = SOURCE_ROOT; };
@@ -201,7 +203,8 @@
 				CB3B408C1C8F454200D495CA /* AIBrain.hpp */,
 				CB3B408D1C8F454200D495CA /* Lookahead.cpp */,
 				CB3B408E1C8F454200D495CA /* Lookahead.hpp */,
-				CB2D44A51C9ADEB600F91C3B /* AIValues.hpp */,
+				CBCD5BB31C9B42BF0055BC0F /* AIValues.cpp */,
+				CBCD5BB41C9B42BF0055BC0F /* AIValues.hpp */,
 			);
 			path = AI;
 			sourceTree = "<group>";
@@ -337,6 +340,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CBCD5BB51C9B42BF0055BC0F /* AIValues.cpp in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				CB3B409A1C8F454200D495CA /* GameOver.cpp in Sources */,
 				CB06F91B1C99BBA5006F6690 /* AISettings.cpp in Sources */,

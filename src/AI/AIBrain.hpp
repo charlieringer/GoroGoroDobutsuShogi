@@ -37,4 +37,6 @@ public:
     bool started(){ return aiStarted;};
 };
 
+
+
 #endif /* AIBrain_hpp */

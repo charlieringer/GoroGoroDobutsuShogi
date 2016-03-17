@@ -11,7 +11,7 @@
 
 Game::Game(shared_ptr<ImageBank> _imgBank): xOffset(100), yOffset(170), pieceHeight(80), pieceWidth(80), imgBank(_imgBank)
 {
-    //Lo
+    //Loads the font
     bool fontLoaded = dispFont.load("Fonts/CHOWFUN_.TTF", 42);
     assert(fontLoaded);
     background = imgBank->loadImage("Backgrounds/blurredbackground.jpg");
@@ -53,9 +53,9 @@ void Game::draw()
     gameBackground->draw(xOffset,yOffset);
     
     if(playersTurn)
-        dispFont.drawString("Your Turn", 50, 50);
+        dispFont.drawString("Your Turn", 80, 80);
     else
-       dispFont.drawString("AI thinking...", 10, 50);
+       dispFont.drawString("AI thinking...", 40, 80);
     
     for(GamePiecePtr &gamePiece : gameboard) gamePiece->drawPiece(xOffset, pieceWidth, yOffset, pieceHeight);
     

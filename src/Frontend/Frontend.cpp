@@ -42,6 +42,8 @@ void Frontend::handleClick(int x, int y)
 {
     if(play.clicked(x,y))
         GameState::setState(GAME);
+    else if(aiSettings.clicked(x,y))
+        GameState::setState(AISETTINGS);
     else if(instructions.clicked(x,y))
         GameState::setState(INSTRUCTIONS);
     

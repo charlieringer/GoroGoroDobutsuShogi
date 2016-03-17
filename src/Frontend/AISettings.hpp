@@ -17,13 +17,20 @@
 class AISettings: public GameState
 {
 private:
+    ofImage* background;
     Button back;
+    Button title;
+    Button lArrowItt;
+    Button rArrowItt;
+    Button lArrowExp;
+    Button rArrowExp;
+    ofTrueTypeFont dispFont;
     
 public:
     AISettings(shared_ptr<ImageBank> imgBank);
     virtual void update(){};
-    virtual void draw(){};
-    virtual void handleClick(int x, int y){};
+    virtual void draw();
+    virtual void handleClick(int x, int y);
     
 };
 
