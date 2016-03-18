@@ -160,8 +160,10 @@ void Game::handleClick(int x, int y)
         {
             bool dropped = handleDroppedPiece(convertedX,convertedY);
             if(dropped)
+            {
                 playerSelectedPiece = nullptr;
                 playersTurn = false;
+            }
             return;
         }
         //See if we have clicked on a piece we can move/drop
@@ -179,8 +181,7 @@ void Game::handleClick(int x, int y)
                 }
             }
             movePiece(playerSelectedPiece, convertedX, convertedY);
-            playerSelectedPiece = nullptr
-            ;
+            playerSelectedPiece = nullptr;
             playersTurn = false;
         }
         
@@ -258,12 +259,15 @@ bool Game::handleDroppedPiece(int x,int y)
 {
     for(GamePiecePtr &piece : gameboard)
     {
-        if(piece->getX() == x && piece->getY() == y && piece->getType() != PieceType::BLANK) return false;
         if(piece->getX() == x && piece->getY() == y && piece->getOwner() == player)
         {
             playerSelectedPiece = piece;
             return false;
-  
+            
+        }
+        if(piece->getX() == x && piece->getY() == y && piece->getType() != PieceType::BLANK)
+        {
+            return false;
         }
     }
     

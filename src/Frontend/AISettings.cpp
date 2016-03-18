@@ -33,10 +33,18 @@ void AISettings::draw()
     rArrowExp.draw();
     lArrowExp.draw();
     
+    string exploreWeight = to_string(AIValues::getExploreConstant());
+    if (AIValues::getExploreConstant() < 10)
+    {
+        exploreWeight.resize(3);
+    } else {
+        exploreWeight.resize(4);
+    }
+    
     dispFont.drawString("Number of iterations:", 90, 170);
     dispFont.drawString(to_string(AIValues::getNumIterations()), 200, 230);
     dispFont.drawString("Explore weighting:", 100, 370);
-    dispFont.drawString(to_string(AIValues::getExploreConstant()), 160, 430);
+    dispFont.drawString(exploreWeight, 210, 430);
 
 }
 
