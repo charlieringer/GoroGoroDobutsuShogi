@@ -48,6 +48,7 @@ private:
 public:
     HumanPlayer(shared_ptr<ImageBank> imgBank);
     HumanPlayer( const HumanPlayer &HumanPlayer);
+    virtual ~HumanPlayer();
     void addToBank(PieceType type);
     bool isAI(){ return ai; };
     virtual shared_ptr<Player>  clonePlayer();
@@ -60,6 +61,7 @@ class AIPlayer: public Player
 public:
     AIPlayer(shared_ptr<ImageBank> imgBank);
     AIPlayer( const AIPlayer &player);
+    ~AIPlayer();
     void addToBank(PieceType type);
     bool isAI(){ return ai; };
     virtual shared_ptr<Player> clonePlayer();

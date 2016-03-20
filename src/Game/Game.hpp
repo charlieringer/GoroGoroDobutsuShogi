@@ -51,6 +51,7 @@ private:
     
 public:
     Game(shared_ptr<ImageBank> _imgBank);
+    Game(const Game& other);
     ~Game();
     
     virtual void update();

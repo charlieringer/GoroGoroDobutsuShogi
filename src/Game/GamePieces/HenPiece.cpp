@@ -20,6 +20,8 @@ HenPiece::HenPiece(int x, int y, Player* _owner, shared_ptr<ImageBank> imgBank )
     type = PieceType::HEN;
 }
 
+HenPiece::~HenPiece(){}
+
 
 bool HenPiece::canMove(int newX, int newY)
 {

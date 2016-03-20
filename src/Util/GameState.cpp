@@ -8,6 +8,6 @@
 
 #include "GameState.hpp"
 
-vector<unique_ptr<GameState> > GameState::states;
+vector<shared_ptr<GameState> > GameState::states;
 
 int GameState::currentState = -1;

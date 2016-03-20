@@ -28,10 +28,12 @@ protected:
     PieceType type;
     Player* owner;
     
+    //Protected because you should never make a GamePiece, only its derived class
     GamePiece(int x, int y, Player* _owner);
+    //No copy constructor because we want default behaviour and cannot redefine the implict copy constuctor. 
+    virtual ~GamePiece();
     
     void setDisplayImage(string path, shared_ptr<ImageBank> imgBank);
-    
     
 public:
 

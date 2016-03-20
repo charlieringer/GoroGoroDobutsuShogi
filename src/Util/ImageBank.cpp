@@ -16,6 +16,7 @@ ImageBank::ImageBank()
 
 ImageBank::~ImageBank()
 {
+    //Deletes all of the images in the image bank
     for(auto image: images)
     {
         delete image.second;

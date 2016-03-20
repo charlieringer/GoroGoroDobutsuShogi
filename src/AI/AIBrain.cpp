@@ -69,7 +69,6 @@ Lookahead AIBrain::mcts(vector<GamePiecePtr>& gameBoard, Player* p1, Player* p2)
                 return potentialMoves[i];
             
             //These are some scores we use for working out how good a move is
-            float losses = potentialMoves[i].getLosses();
             float wins = potentialMoves[i].getWins();
             int games = potentialMoves[i].getNumbCompletedGames();
             
@@ -109,7 +108,6 @@ Lookahead AIBrain::mcts(vector<GamePiecePtr>& gameBoard, Player* p1, Player* p2)
             //We loop through the children trying to find the best one.
             for(int i = 0; i < bestChild->getNumbChildren(); i++){
                 //Scores as per the previous part
-                float losses = bestChild->getChildren()[i].getLosses();
                 float wins = bestChild->getChildren()[i].getWins();
                 int games = bestChild->getChildren()[i].getNumbCompletedGames();
                 
@@ -146,7 +144,6 @@ Lookahead AIBrain::mcts(vector<GamePiecePtr>& gameBoard, Player* p1, Player* p2)
     int bestIndex = -1;
     for(int i = 0; i < potentialMoves.size(); i++)
     {
-        float losses = potentialMoves[i].getLosses();
         float wins = potentialMoves[i].getWins();
         int games = potentialMoves[i].getNumbCompletedGames();
         float score = (wins/games);

@@ -9,6 +9,8 @@
 #include "GamePiece.hpp"
 
 GamePiece::GamePiece(int _x, int _y, Player* _owner = NULL): x(_x), y(_y), owner(_owner){}
+//No data needed to be expressly deleted as we do not own anything we are pointing to.
+GamePiece::~GamePiece(){}
 
 
 void GamePiece::setDisplayImage(string path, shared_ptr<ImageBank> imgBank)

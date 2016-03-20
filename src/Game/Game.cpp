@@ -38,6 +38,36 @@ Game::Game(shared_ptr<ImageBank> _imgBank): xOffset(100), yOffset(170), pieceHei
     gameboard.push_back(make_shared<GiraffePiece>(2,3, player, imgBank));
 }
 
+Game::Game(const Game& other): xOffset(100), yOffset(170), pieceHeight(80), pieceWidth(80)
+{
+    //Loads the font
+    bool fontLoaded = dispFont.load("Fonts/CHOWFUN_.TTF", 42);
+    assert(fontLoaded);
+    imgBank = other.imgBank;
+    background = imgBank->loadImage("Backgrounds/blurredbackground.jpg");
+    gameBackground = imgBank->loadImage("Backgrounds/gamebackground.jpg");
+    player = new HumanPlayer(imgBank);
+    ai = new AIPlayer(imgBank);
+    brain = new AIBrain();
+    
+    //This is the inital game board
+    gameboard.push_back(make_shared<GiraffePiece>(0,0, ai, imgBank));
+    gameboard.push_back(make_shared<LionPiece>(1,0, ai, imgBank));
+    gameboard.push_back(make_shared<ElephantPiece>(2,0, ai, imgBank));
+    
+    gameboard.push_back(make_shared<BlankPiece>(0,1, imgBank));
+    gameboard.push_back(make_shared<ChickPiece>(1,1, ai, imgBank));
+    gameboard.push_back(make_shared<BlankPiece>(2,1, imgBank));
+    
+    gameboard.push_back(make_shared<BlankPiece>(0,2, imgBank));
+    gameboard.push_back(make_shared<ChickPiece>(1,2, player, imgBank));
+    gameboard.push_back(make_shared<BlankPiece>(2,2, imgBank));
+    
+    gameboard.push_back(make_shared<ElephantPiece>(0,3, player, imgBank));
+    gameboard.push_back(make_shared<LionPiece>(1,3, player, imgBank));
+    gameboard.push_back(make_shared<GiraffePiece>(2,3, player, imgBank));
+}
+
 Game::~Game()
 {
     //Nearly everthing in game is either a value or a shared_ptr so this is all we need to delete

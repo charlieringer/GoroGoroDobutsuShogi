@@ -33,15 +33,26 @@ private:
     }
     
 protected:
-    static vector<unique_ptr<GameState>> states;
+    //This contains all of our game states
+    static vector<shared_ptr<GameState>> states;
+    //And this tracks which of our games states is the current one
     static int currentState;
     //This needs to be here for the derived classed
     GameState(){};
     
 public:
     static void addGameState(GameState* state) {states.push_back(unique_ptr<GameState> (state)); };
-    static void setState(int newState){ currentState = newState;};
-    static GameState* getCurrentState(){ return states[currentState].get();};
+    //Sets the state to a passed in value
+    static void setState(int newState){
+        assert(newState < states.size());
+        currentState = newState;
+    };
+    //Returns a shared pointer to the current state.
+    //This is shared in the hopes that it shows ownership of this data.
+    //Therefore noone will get the raw pointer and try to delete it.
+    static shared_ptr<GameState> getCurrentState(){ return states[currentState];};
+    
+    //All game states must be able to do the following (or at least have them defined if they are empty)
     virtual void draw() = 0;
     virtual void update() = 0;
     virtual void handleClick(int x, int y) = 0;

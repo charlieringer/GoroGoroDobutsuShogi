@@ -21,6 +21,11 @@ ChickPiece::ChickPiece(int x, int y, Player* _owner, shared_ptr<ImageBank> imgBa
     type = PieceType::CHICK;
 }
 
+//No data needed to be expressly deleted as we do not own anything we are pointing to.
+ChickPiece::~ChickPiece(){}
+
+
+
 bool ChickPiece::canMove(int newX, int newY)
 {
     //Chicks can only move forward

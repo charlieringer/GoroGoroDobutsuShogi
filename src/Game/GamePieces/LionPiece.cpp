@@ -21,6 +21,8 @@ LionPiece::LionPiece(int x, int y, Player* _owner, shared_ptr<ImageBank> imgBank
     
 }
 
+LionPiece::~LionPiece(){}
+
 bool LionPiece::canMove(int newX, int newY)
 {
     if ((((newY == y+1 && newX == x)|| (newY == y-1 && newX == x)|| (newX == x+1 && newY == y)|| (newX == x-1 && newY == y))

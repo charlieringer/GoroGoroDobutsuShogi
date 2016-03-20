@@ -19,6 +19,8 @@ GiraffePiece::GiraffePiece(int x, int y, Player* _owner, shared_ptr<ImageBank> i
     type = PieceType::GIRAFFE;
 }
 
+GiraffePiece::~GiraffePiece(){}
+
 bool GiraffePiece::canMove(int newX, int newY)
 {
     if (((newY == y+1 && newX == x)

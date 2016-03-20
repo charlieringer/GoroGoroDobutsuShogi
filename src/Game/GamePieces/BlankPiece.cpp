@@ -16,6 +16,8 @@ BlankPiece::BlankPiece(int x, int y, shared_ptr<ImageBank> imgBank, Player* _own
     type = PieceType::BLANK;
 }
 
+BlankPiece::~BlankPiece(){}
+
 
 bool BlankPiece::canMove(int newX, int newY)
 {
