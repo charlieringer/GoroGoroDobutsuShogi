@@ -11,8 +11,8 @@ void ofApp::setup(){
     GameState::addGameState(new GameOverLose(imgBank));
     GameState::addGameState(new GameOverWin(imgBank));
     GameState::setState(FRONTEND);
-    AIValues::setExploreConstant(2);
-    AIValues::setNumIterations(800);
+    AIValues::setExploreConstant(1);
+    AIValues::setNumIterations(5000);
 }
 
 //--------------------------------------------------------------

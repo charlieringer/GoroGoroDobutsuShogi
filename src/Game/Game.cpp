@@ -352,6 +352,7 @@ void Game::checkEnd()
 
 void Game::reset()
 {
+    playerSelectedPiece = nullptr;
     player->clearBank();
     ai->clearBank();
     gameboard.clear();

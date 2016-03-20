@@ -126,6 +126,7 @@ vector<Lookahead> Lookahead::generateChildren()
         }
         
     }
+    children = returnChildren;
     return returnChildren;
 }
 
@@ -176,7 +177,6 @@ bool Lookahead::checkTerminality()
 {
     //We only care about a capture on player1 as player2 played last turn and you can only win on your turn not lose
     bool player1HasLion = false;
-    bool player2HasLion = false;
     for(GamePiecePtr &gamePiece : gameboard)
     {
         if(gamePiece)
@@ -185,7 +185,6 @@ bool Lookahead::checkTerminality()
             {
                 if (gamePiece->getOwner() == player2.get())
                 {
-                    player2HasLion = true;
                     if ((gamePiece->getY() == 0 && !(gamePiece->getOwner()->isAI())) ||
                         (gamePiece->getY() == 3 && gamePiece->getOwner()->isAI()) )
                     {
@@ -197,10 +196,6 @@ bool Lookahead::checkTerminality()
                 }
             }
         }
-    }
-    if(!player2HasLion)
-    {
-        return true;
     }
    // assert(player2HasLion);
     if(!player1HasLion)
@@ -233,68 +228,4 @@ vector<GamePiecePtr> Lookahead::copyGameBoard(vector<GamePiecePtr> initalBoard, 
     return returnBoard;
 }
 
-void Lookahead::randomPlayOut()
-{
-    if (checkTerminality())
-    {
-        games++;
-        wins++;
-        parent->addLoss();
-        return;
-    }
-    //We randomly playout till we reach a terminal state
-    bool terminalStateFound = false;
-    
-    //This are the potential moves
-    assert(player1);
-    assert(player2);
-    vector<Lookahead> playOutChildren = generateChildren();
-    //Of which we are selecting a random one
-    if(playOutChildren.size() == 0) return;
-    int randomIndex = rand()%playOutChildren.size();
-    if(playOutChildren[randomIndex].checkTerminality())
-    {
-        games++;
-        wins++;
-        parent->addLoss();
-        return;
-    }
-    
-    //These are the moves we have looked at (so we are going to build a list which will represent the entire played out game)
-    vector<Lookahead> evaluatedMoves;
-    //We add the first random child to it
-    evaluatedMoves.push_back(playOutChildren[randomIndex]);
 
-    //While we have not found a termina state
-    while(!terminalStateFound)
-    {
-        //We continue
-        if(evaluatedMoves[evaluatedMoves.size()-1].terminal())
-        {
-            if(evaluatedMoves.size()%2 == 0)
-            {
-                games++;
-                losses++;
-                parent->addWin();
-            }
-            else
-            {
-                games++;
-                wins++;
-                parent->addLoss();
-            }
-            terminalStateFound = true;
-        } else {
-            vector<Lookahead> playOutChildren = evaluatedMoves[evaluatedMoves.size()-1].generateChildren();
-            //
-            if (evaluatedMoves[evaluatedMoves.size()-1].getDepth() > 78)
-            {
-                games++;
-               return;
-            }
-            randomIndex = rand()%playOutChildren.size();
-            evaluatedMoves.push_back(playOutChildren[randomIndex]);
-        }
-    }
-    
-}

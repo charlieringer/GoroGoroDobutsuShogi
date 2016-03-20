@@ -20,8 +20,8 @@ private:
     shared_ptr<Player> player2;
     vector<Lookahead> children;
     Lookahead* parent;
-    int wins = 0;
-    int losses = 0;
+    float wins = 0;
+    float losses = 0;
     int games = 0;
     int depthLevel;
     bool isTerminal;
@@ -29,23 +29,8 @@ private:
     vector<GamePiecePtr> copyGameBoard(vector<GamePiecePtr> initalBoard, shared_ptr<Player> p1, shared_ptr<Player> p2);
     void simulateDroppedPiece(vector<GamePiecePtr> &board, GamePiecePtr piece, shared_ptr<Player> owner, int x,int y);
     void simulatePromotion(vector<GamePiecePtr> &board, GamePiecePtr piece, shared_ptr<Player> owner);
-     bool checkTerminality();
-    
-    void addWin()
-    {
-        wins++;
-        games++;
-        if (parent)
-            parent->addLoss();
-    }
-    void addLoss()
-    {
-        losses++;
-        games++;
-        if (parent)
-            parent->addWin();
-    }
-    
+    bool checkTerminality();
+
 public:
     Lookahead(){};
     Lookahead(vector<GamePiecePtr>& _gameboard, shared_ptr<Player> _player1, shared_ptr<Player> _player2, Lookahead* _parent, int _depthLevel);
@@ -54,8 +39,8 @@ public:
     
     bool terminal(){ return isTerminal;};
     int getNumbCompletedGames(){ return games;};
-    int getWins(){ return wins;};
-    int getLosses( ){return losses;};
+    float getWins(){ return wins;};
+    float getLosses( ){return losses;};
     int getNumbChildren(){ return children.size();};
     int getDepth(){ return depthLevel;};
     shared_ptr<Player> getPlayer1(){ return player1;};
@@ -63,7 +48,24 @@ public:
     vector<GamePiecePtr> getBoard(){ return gameboard;};
     Lookahead* getParent(){ return parent;};
     
-    void randomPlayOut();
+    void addWin(float winAmount)
+    {
+        wins+=winAmount;
+        games++;
+        if (parent)
+            parent->addLoss(winAmount);
+    }
+    
+    void addLoss(float lossAmount)
+    {
+        losses+=lossAmount;
+        games++;
+        if (parent)
+            parent->addWin(lossAmount);
+    }
+    
+    void addGame(){ games++;}
+    
     vector<Lookahead> generateChildren();
     vector<Lookahead>& getChildren(){ return children;};
     void setChildren(vector<Lookahead> _children){children = _children;};
