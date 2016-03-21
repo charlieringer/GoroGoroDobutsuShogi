@@ -28,6 +28,8 @@ private:
     
 public:
     AISettings(shared_ptr<ImageBank> imgBank);
+    AISettings(const AISettings& other);
+    virtual ~AISettings();
     virtual void update(){};
     virtual void draw();
     virtual void handleClick(int x, int y);

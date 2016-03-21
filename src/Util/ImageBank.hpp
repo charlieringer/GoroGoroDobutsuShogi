@@ -21,8 +21,9 @@ private:
     
 public:
     ImageBank();
+    ImageBank(const ImageBank& other);
     ~ImageBank();
-    //fucntion to load an image and return a pointer to it
+    //function to load an image and return a pointer to it
     ofImage * loadImage(string imgPath);
 };
 

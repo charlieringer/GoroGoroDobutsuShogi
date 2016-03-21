@@ -20,8 +20,13 @@ ElephantPiece::ElephantPiece(int x, int y, Player* _owner, shared_ptr<ImageBank>
     type = PieceType::ELEPHANT;
 }
 
-//No data needed to be expressly deleted as we do not own anything we are pointing to.
 ElephantPiece::~ElephantPiece(){}
+
+ElephantPiece::ElephantPiece(const ElephantPiece& other): GamePiece(other)
+{
+    type = PieceType::ELEPHANT;
+}
+
 
 bool ElephantPiece::canMove(int newX, int newY)
 {

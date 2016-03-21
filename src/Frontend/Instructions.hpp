@@ -24,6 +24,9 @@ private:
     
 public:
     Instructions(shared_ptr<ImageBank> imgBank);
+    Instructions(const Instructions& other);
+    virtual ~Instructions();
+    
     virtual void update(){};
     virtual void draw();
     virtual void handleClick(int x, int y);

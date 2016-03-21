@@ -20,6 +20,11 @@ HenPiece::HenPiece(int x, int y, Player* _owner, shared_ptr<ImageBank> imgBank )
     type = PieceType::HEN;
 }
 
+HenPiece::HenPiece(const HenPiece& other): GamePiece(other)
+{
+    type = PieceType::HEN;
+}
+
 HenPiece::~HenPiece(){}
 
 

@@ -16,8 +16,9 @@ class BlankPiece: public GamePiece
 {
 public:
     BlankPiece(int x, int y, shared_ptr<ImageBank> imgBank = NULL, Player* _owner = NULL);
-    //No copy constructor because we want default behaviour as cannot redefine the implict copy constuctor.
+    BlankPiece(const BlankPiece& other);
     virtual ~BlankPiece();
+    
     virtual bool canMove(int newX, int newY);
     virtual shared_ptr<GamePiece> clone();
 };

@@ -16,16 +16,18 @@
 class Button
 {
 private:
+    //XY for top left corner
     int x;
     int y;
+    //Height and width
     int h;
     int w;
-    string id;
     ofImage* dispImage;
 public:
-    Button(){};
-    ~Button(){};
-    Button(int _x, int _y, int _w, int _h, string ident, string imgPath, shared_ptr<ImageBank>& imgBank);
+    Button(int _x, int _y, int _w, int _h, string imgPath, shared_ptr<ImageBank>& imgBank);
+    Button(const Button& other);
+    ~Button();
+
     void draw();
     bool clicked(int mX, int mY);
 };

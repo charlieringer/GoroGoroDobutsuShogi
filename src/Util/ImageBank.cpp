@@ -9,10 +9,11 @@
 #include "ImageBank.hpp"
 
 //This class handles all of my images so that they do not get loaded multiple times.
-ImageBank::ImageBank()
-{
-    
-}
+ImageBank::ImageBank(){}
+
+//Copy constructor
+ImageBank::ImageBank(const ImageBank& other): images(other.images){}
+
 
 ImageBank::~ImageBank()
 {

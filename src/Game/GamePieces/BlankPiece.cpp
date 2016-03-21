@@ -16,6 +16,11 @@ BlankPiece::BlankPiece(int x, int y, shared_ptr<ImageBank> imgBank, Player* _own
     type = PieceType::BLANK;
 }
 
+BlankPiece::BlankPiece(const BlankPiece& other): GamePiece(other)
+{
+    type = PieceType::BLANK;
+}
+
 BlankPiece::~BlankPiece(){}
 
 

@@ -9,28 +9,24 @@
 #include "Frontend.hpp"
 #include "Button.hpp"
 
-Frontend::Frontend(shared_ptr<ImageBank> _imgBank)
+Frontend::Frontend(shared_ptr<ImageBank> _imgBank):
+    //title is not clickable so H/W is 0,0
+    title(0,100, 0,0, "Buttons/Title.png", _imgBank),
+    play(71, 250, 300, 64, "Buttons/play.png", _imgBank),
+    aiSettings(71, 375, 300, 72, "Buttons/settings.png", _imgBank),
+    instructions(71, 450, 300, 72, "Buttons/inst.png", _imgBank)
 {
-    imgBank = _imgBank;
-    background = imgBank->loadImage("Backgrounds/frontendbackground.jpg");
-    //not cliackable
-    title = Button(0,100, 0,0, "title", "Buttons/Title.png", imgBank);
-    play = Button(71, 250, 300, 64, "play", "Buttons/play.png", imgBank);
-    aiSettings = Button(71, 375, 300, 72, "settings","Buttons/settings.png", imgBank);
-    instructions = Button(71, 450, 300, 72, "inst","Buttons/inst.png", imgBank);
+    background = _imgBank->loadImage("Backgrounds/frontendbackground.jpg");
 }
 
-Frontend::Frontend(const Frontend& other)
-{
-    imgBank = other.imgBank;
-    background = imgBank->loadImage("Backgrounds/Background.jpg");
-    title  = Button(0,100, 100,100, "title", "Buttons/Title.png", imgBank);
-    play = Button(0, 300, 442, 94, "play", "Buttons/play.png", imgBank);
-    aiSettings =  Button(71, 375, 300, 72, "settings","Buttons/settings.png", imgBank);
-}
+//Only pointer is an image (which we do not own) so nothing to delete.
+Frontend::~Frontend(){}
+
+Frontend::Frontend(const Frontend& other): background(other.background), title(other.title), play(other.play),aiSettings(other.aiSettings), instructions(other.instructions){}
 
 void Frontend::draw()
 {
+    //Draws the background and all the buttons
     background->draw(0,0);
     title.draw();
     play.draw();
@@ -40,6 +36,7 @@ void Frontend::draw()
 
 void Frontend::handleClick(int x, int y)
 {
+    //we check which button was clicked and update the state accordingly
     if(play.clicked(x,y))
         GameState::setState(GAME);
     else if(aiSettings.clicked(x,y))

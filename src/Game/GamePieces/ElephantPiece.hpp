@@ -16,8 +16,9 @@ class ElephantPiece: public GamePiece
 {
 public:
     ElephantPiece(int x, int y, Player* _owner, shared_ptr<ImageBank> imgBank = NULL);
-    //No copy constructor because we want default behaviour and cannot redefine the implict copy constuctor. 
+    ElephantPiece(const ElephantPiece& other);
     virtual ~ElephantPiece();
+    
     virtual bool canMove(int newX, int newY);
     virtual shared_ptr<GamePiece> clone();
 };

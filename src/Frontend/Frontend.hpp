@@ -26,6 +26,7 @@ private:
     
 public:
     Frontend(shared_ptr<ImageBank> _imgBank);
+    virtual ~Frontend();
     Frontend( const Frontend& other);
     virtual void update(){};
     virtual void draw();

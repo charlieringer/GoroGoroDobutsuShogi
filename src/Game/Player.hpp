@@ -36,7 +36,7 @@ public:
     shared_ptr<ImageBank> getImageBank() const{ return imgBank;};
     vector<shared_ptr<GamePiece>>& getBankRef() { return bank;};
     vector<shared_ptr<GamePiece>> getBankConst() const { return bank;};
-    virtual void addToBank(PieceType type);
+    virtual void addToBank(PieceType type) = 0;
     void clearBank(){ bank.clear();};
     virtual shared_ptr<Player> clonePlayer() = 0;
 };
@@ -61,7 +61,7 @@ class AIPlayer: public Player
 public:
     AIPlayer(shared_ptr<ImageBank> imgBank);
     AIPlayer( const AIPlayer &player);
-    ~AIPlayer();
+    virtual ~AIPlayer();
     void addToBank(PieceType type);
     bool isAI(){ return ai; };
     virtual shared_ptr<Player> clonePlayer();

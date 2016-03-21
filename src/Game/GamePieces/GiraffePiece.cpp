@@ -19,6 +19,11 @@ GiraffePiece::GiraffePiece(int x, int y, Player* _owner, shared_ptr<ImageBank> i
     type = PieceType::GIRAFFE;
 }
 
+GiraffePiece::GiraffePiece(const GiraffePiece& other): GamePiece(other)
+{
+    type = PieceType::GIRAFFE;
+}
+
 GiraffePiece::~GiraffePiece(){}
 
 bool GiraffePiece::canMove(int newX, int newY)

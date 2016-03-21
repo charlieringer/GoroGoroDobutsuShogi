@@ -40,7 +40,9 @@ protected:
     //This needs to be here for the derived classed
     GameState(){};
     
+    
 public:
+    virtual ~GameState(){};
     static void addGameState(GameState* state) {states.push_back(unique_ptr<GameState> (state)); };
     //Sets the state to a passed in value
     static void setState(int newState){

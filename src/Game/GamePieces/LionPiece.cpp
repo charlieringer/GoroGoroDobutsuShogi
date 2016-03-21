@@ -18,7 +18,11 @@ LionPiece::LionPiece(int x, int y, Player* _owner, shared_ptr<ImageBank> imgBank
         else setDisplayImage("Tiles/LionPlayer.png", imgBank);
     }
     type = PieceType::LION;
-    
+}
+
+LionPiece::LionPiece(const LionPiece& other): GamePiece(other)
+{
+    type = PieceType::LION;
 }
 
 LionPiece::~LionPiece(){}
