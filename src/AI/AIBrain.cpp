@@ -11,6 +11,7 @@
 #include "AIValues.hpp"
 
 AIBrain::AIBrain():threadDone(false), aiStarted(false){}
+AIBrain::AIBrain(const AIBrain& other):threadDone(false), aiStarted(false){}
 
 AIBrain::~AIBrain()
 {
@@ -19,8 +20,6 @@ AIBrain::~AIBrain()
 
 void AIBrain::startAI(vector<GamePiecePtr>& gameBoard, Player* p1, Player* p2)
 {
-    //delete old thread
-    delete aiThread;
     //We set the thread to a new thread starting a MCTS search
     aiThread = new std::thread(&AIBrain::startMCTS, this, std::ref(gameBoard), p1, p2);
     //And detach this thread so it can work on it's own

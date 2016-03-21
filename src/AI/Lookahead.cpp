@@ -12,14 +12,15 @@
 #include "GiraffePiece.hpp"
 #include "ElephantPiece.hpp"
 #include "ChickPiece.hpp"
-#include <thread>
 
+//Constuctor for the top level lookahead (when constucted from a real game)
 Lookahead::Lookahead(vector<GamePiecePtr>& _gameboard, shared_ptr<Player> _player1, shared_ptr<Player> _player2, Lookahead* _parent, int _depthLevel): parent(_parent), gameboard(_gameboard), player1(_player1), player2(_player2), depthLevel(_depthLevel)
 {
     assert(_gameboard.size()==12);
     isTerminal = checkTerminality();
 }
 
+//Constructor for when we make look aheads deeper into the AI
 Lookahead::Lookahead(vector<GamePiecePtr>& _gameboard, Player* _player1, Player* _player2): depthLevel(0), parent(nullptr)
 {
     assert(_gameboard.size()==12);
@@ -30,38 +31,54 @@ Lookahead::Lookahead(vector<GamePiecePtr>& _gameboard, Player* _player1, Player*
     isTerminal = checkTerminality();
 }
 
-Lookahead::~Lookahead()
+//Copy constructor
+Lookahead::Lookahead(const Lookahead& other): depthLevel(other.depthLevel),parent(other.parent)
 {
+    player1 = other.player1.get()->clonePlayer();
+    player2 = other.player2.get()->clonePlayer();
+    gameboard = copyGameBoard(other.gameboard, player1, player2);
+    isTerminal = checkTerminality();
 }
+
+//Nothing is owned on the heap so nothing to delete
+Lookahead::~Lookahead(){}
 
 vector<Lookahead> Lookahead::generateChildren()
 {
+    //This is what we are going to return
     vector<Lookahead> returnChildren;
+    assert(player1);
     for (int i = 0; i < gameboard.size(); i++)
     {
-        assert(player1);
+        //We go through the game board
+        //The player one owns it..
         if(gameboard[i]->getOwner() == player1.get())
         {
             GamePiecePtr movingPiece = gameboard[i];
             int thisX = movingPiece->getX();
             int thisY = movingPiece->getY();
             
+            //We loop though again looking for places to move it
             for(int j = 0; j < gameboard.size(); j++)
             {
                 GamePiecePtr targetPosPiece = gameboard[j];
                 int targetX = targetPosPiece->getX();
                 int targetY = targetPosPiece->getY();
                 
+                //If this position is owned but p1 we cannot move so continue
                 if(targetPosPiece->getOwner() == player1.get()) continue;
+                //Likewise if the peice can't move here continue
                 else if(!movingPiece->canMove(targetX,targetY)) continue;
                 
                 else if (targetPosPiece->getType() == PieceType::BLANK)
                 {
+                    //Otherwise clone the game
                     shared_ptr<Player> cloneOf1 = player1->clonePlayer();
                     shared_ptr<Player> cloneOf2 = player2->clonePlayer();
                     vector<GamePiecePtr> boardClone = copyGameBoard(gameboard, cloneOf1, cloneOf2);
                     GamePiecePtr clonedCurrentPiece = boardClone[i];
                     GamePiecePtr clonedTargetPiece = boardClone[j];
+                    //Make the move
                     clonedCurrentPiece->moveTo(targetX, targetY);
                     clonedTargetPiece->moveTo(thisX, thisY);
                     //check for promotion
@@ -75,6 +92,7 @@ vector<Lookahead> Lookahead::generateChildren()
                     assert(cloneOf1);
                     assert(cloneOf2);
                     assert(boardClone.size()==12);
+                    //And add this as a child
                     returnChildren.push_back(Lookahead(boardClone, cloneOf2, cloneOf1, this, depthLevel+1));
                 } else {
                     //Remove captured piece and replace capturing piece with blank piece.
@@ -86,8 +104,11 @@ vector<Lookahead> Lookahead::generateChildren()
 
                     cloneOf1->addToBank(clonedTargetPiece->getType());
                    
+                    //Add new blank peice
                     boardClone.push_back(make_shared<BlankPiece>(clonedCurrentPiece->getX(), clonedCurrentPiece->getY()));
+                    //move capturing peice
                     clonedCurrentPiece->moveTo(clonedTargetPiece->getX(), clonedTargetPiece->getY());
+                    //Remove captured piece
                     boardClone.erase(boardClone.begin() + j);
                     
                     //check for promotion
@@ -101,45 +122,53 @@ vector<Lookahead> Lookahead::generateChildren()
                     assert(cloneOf1);
                     assert(cloneOf2);
                     assert(boardClone.size()==12);
+                    //And add this as a child
                     returnChildren.push_back(Lookahead(boardClone, cloneOf2, cloneOf1, this, depthLevel+1));
                 }
             }
         }
     }
+    //Simulates droping peices from hand
     vector<GamePiecePtr> playerBank = player1->getBankRef();
     for(int i = 0; i < playerBank.size(); i++)
     {
         for(GamePiecePtr& boardPiece : gameboard)
         {
+            //If it is not blank we cannot drop here
             if (boardPiece->getType() != PieceType::BLANK) continue;
+            //Otherwise clone all info
             shared_ptr<Player> cloneOf1 = player1->clonePlayer();
             shared_ptr<Player> cloneOf2 = player2->clonePlayer();
             vector<GamePiecePtr> copyBoard = copyGameBoard(gameboard, cloneOf1, cloneOf2);
-            if(cloneOf1->getBankRef().size() > i)
-            {
-                simulateDroppedPiece(copyBoard, cloneOf1->getBankRef()[i], cloneOf1, boardPiece->getX(), boardPiece->getY());
-                assert(cloneOf1);
-                assert(cloneOf2);
-                assert(copyBoard.size()==12);
-                returnChildren.push_back(Lookahead(copyBoard, cloneOf1, cloneOf2, this, depthLevel+1));
-            }
+            //Simulate the dropped piece
+            simulateDroppedPiece(copyBoard, cloneOf1->getBankRef()[i], cloneOf1, boardPiece->getX(), boardPiece->getY());
+            assert(cloneOf1);
+            assert(cloneOf2);
+            assert(copyBoard.size()==12);
+            //And add this as a child
+            returnChildren.push_back(Lookahead(copyBoard, cloneOf1, cloneOf2, this, depthLevel+1));
         }
         
     }
+    //We set our children as these
     children = returnChildren;
+    //And also return them
     return returnChildren;
 }
 
 void Lookahead::simulateDroppedPiece(vector<GamePiecePtr> &board, GamePiecePtr piece, shared_ptr<Player> owner, int x,int y)
 {
+    //Incase the piece is null
     if(!piece) return;
     assert(board.size()==12);
+    //We erase the old piece
     board.erase(
                 std::remove_if(board.begin(), board.end(),
                                [x,y](GamePiecePtr thisPiece)
                                { return thisPiece->getX() == x && thisPiece->getY() == y; })
                 );
     assert(board.size()==11);
+    //Then add a piece to the board based on the type of the dropped peice
     if(piece->getType() == PieceType::CHICK)
         board.push_back(make_shared<ChickPiece>(x, y, owner.get()));
     else if(piece->getType() == PieceType::GIRAFFE)
@@ -149,6 +178,7 @@ void Lookahead::simulateDroppedPiece(vector<GamePiecePtr> &board, GamePiecePtr p
     else
         board.push_back(make_shared<BlankPiece>(x,y));
     assert(board.size()==12);
+    //Then remove the piece from have
     int removeX = piece->getX();
     int removeY = piece->getY();
     vector<shared_ptr<GamePiece>>& bank = owner->getBankRef();
@@ -212,9 +242,11 @@ vector<GamePiecePtr> Lookahead::copyGameBoard(vector<GamePiecePtr> initalBoard, 
     
     for(GamePiecePtr piece : initalBoard)
     {
+        //clone every peice
         GamePiecePtr newPiece = piece->clone();
         if(newPiece->getOwner())
         {
+            //Set there owner
             if(newPiece->getOwner()->isAI() == p1->isAI())
             {
                 newPiece->setOwner(p1.get());
@@ -222,6 +254,7 @@ vector<GamePiecePtr> Lookahead::copyGameBoard(vector<GamePiecePtr> initalBoard, 
                 newPiece->setOwner(p2.get());
             }
         }
+        //And add it to the board
         returnBoard.push_back(newPiece);
     }
     assert(returnBoard.size()==12);

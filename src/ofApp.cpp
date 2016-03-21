@@ -3,6 +3,7 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+    //Sets up the game states
     shared_ptr<ImageBank> imgBank = make_shared<ImageBank>();
     GameState::addGameState(new Frontend(imgBank));
     GameState::addGameState(new AISettings(imgBank));
@@ -11,17 +12,20 @@ void ofApp::setup(){
     GameState::addGameState(new GameOverLose(imgBank));
     GameState::addGameState(new GameOverWin(imgBank));
     GameState::setState(FRONTEND);
+    //And starting AI values
     AIValues::setExploreConstant(1);
     AIValues::setNumIterations(5000);
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
+    //Updates the current state
     GameState::getCurrentState()->update();
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+    //Draws the current state
     GameState::getCurrentState()->draw();
 }
 
@@ -47,6 +51,7 @@ void ofApp::mouseDragged(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
+    //Handles any clicks
     GameState::getCurrentState()->handleClick(x,y);
 }
 

@@ -14,21 +14,26 @@
 class AIValues
 {
 private:
+    //Static data
     static int numbItters;
     static float exploreConst;
     
 public:
+    //Returns the current AI values
     static int getNumIterations(){ return numbItters;};
     static float getExploreConstant(){ return exploreConst;};
     
+    //Sets them to a given number
     static void setNumIterations(int newItters){ numbItters = newItters;};
     static void setExploreConstant(float newConst){ exploreConst = newConst;};
     
-    static void incrementNumIterations(){ if(numbItters< 3000) numbItters+=100;}
-    static void incrementExploreConstant(){ if(exploreConst < 2) exploreConst+=0.2;}
+    //Increments the values (within a given bound)
+    static void incrementNumIterations(){ if(numbItters< 10000) numbItters+=100;}
+    static void incrementExploreConstant(){ if(exploreConst < 2) exploreConst+=0.1;}
     
+    //Decrements the values (within a given bound)
     static void decrementNumIterations(){ if (numbItters >100) numbItters-=100;}
-    static void decrementExploreConstant(){ if (exploreConst> 0.2) exploreConst-=0.2;}
+    static void decrementExploreConstant(){ if (exploreConst> 0.1) exploreConst-=0.1;}
     
 };
 #endif /* AIValues_hpp */

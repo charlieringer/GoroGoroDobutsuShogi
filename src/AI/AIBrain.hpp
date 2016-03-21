@@ -28,10 +28,14 @@ private:
     
 public:
     AIBrain();
+    AIBrain(const AIBrain& other);
     ~AIBrain();
+    
     void startAI(vector<GamePiecePtr>& gameBoard, Player* p1, Player* p2);
     Lookahead getMoveandReset(){
-       // delete aiThread;
+        //reset thread
+        delete aiThread;
+        //And return next move
         return nextMove;
     };
     bool hasNextMove(){ return threadDone;};

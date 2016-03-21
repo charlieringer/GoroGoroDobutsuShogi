@@ -8,5 +8,6 @@
 
 #include "AIValues.hpp"
 
+//Initialistion of static members
 int AIValues::numbItters = -1;
 float AIValues::exploreConst = -1;
