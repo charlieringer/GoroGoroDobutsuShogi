@@ -15,7 +15,8 @@ AIBrain::AIBrain(const AIBrain& other):threadDone(false), aiStarted(false){}
 
 AIBrain::~AIBrain()
 {
-    delete aiThread;
+    if (aiThread)
+        delete aiThread;
 }
 
 void AIBrain::startAI(vector<GamePiecePtr>& gameBoard, Player* p1, Player* p2)

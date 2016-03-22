@@ -35,6 +35,7 @@ public:
     Lookahead getMoveandReset(){
         //reset thread
         delete aiThread;
+        aiThread = nullptr;
         //And return next move
         return nextMove;
     };

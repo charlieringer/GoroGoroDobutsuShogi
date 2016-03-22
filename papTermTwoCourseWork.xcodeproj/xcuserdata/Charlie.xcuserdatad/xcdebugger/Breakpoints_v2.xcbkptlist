@@ -1930,8 +1930,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "41"
             endingLineNumber = "41"
-            landmarkName = "class AIBrain"
-            landmarkType = "3">
+            landmarkName = "getMoveandReset()"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
