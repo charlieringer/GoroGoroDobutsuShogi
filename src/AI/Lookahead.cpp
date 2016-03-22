@@ -139,14 +139,14 @@ vector<Lookahead> Lookahead::generateChildren()
             //Otherwise clone all info
             shared_ptr<Player> cloneOf1 = player1->clonePlayer();
             shared_ptr<Player> cloneOf2 = player2->clonePlayer();
-            vector<GamePiecePtr> copyBoard = copyGameBoard(gameboard, cloneOf1, cloneOf2);
+            vector<GamePiecePtr> boardClone = copyGameBoard(gameboard, cloneOf1, cloneOf2);
             //Simulate the dropped piece
-            simulateDroppedPiece(copyBoard, cloneOf1->getBankRef()[i], cloneOf1, boardPiece->getX(), boardPiece->getY());
+            simulateDroppedPiece(boardClone, cloneOf1->getBankRef()[i], cloneOf1, boardPiece->getX(), boardPiece->getY());
             assert(cloneOf1);
             assert(cloneOf2);
-            assert(copyBoard.size()==12);
+            assert(boardClone.size()==12);
             //And add this as a child
-            returnChildren.push_back(Lookahead(copyBoard, cloneOf1, cloneOf2, this, depthLevel+1));
+            returnChildren.push_back(Lookahead(boardClone, cloneOf2, cloneOf1, this, depthLevel+1));
         }
         
     }
@@ -156,7 +156,7 @@ vector<Lookahead> Lookahead::generateChildren()
     return returnChildren;
 }
 
-void Lookahead::simulateDroppedPiece(vector<GamePiecePtr> &board, GamePiecePtr piece, shared_ptr<Player> owner, int x,int y)
+void Lookahead::simulateDroppedPiece(vector<GamePiecePtr>& board, GamePiecePtr piece, shared_ptr<Player> owner, int x,int y)
 {
     //Incase the piece is null
     if(!piece) return;

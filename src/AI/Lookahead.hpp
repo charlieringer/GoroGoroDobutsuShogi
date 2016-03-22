@@ -27,6 +27,7 @@ private:
     float wins = 0;
     float losses = 0;
     int games = 0;
+    int draws = 0;
     //How deep in the look ahead this is
     int depthLevel;
     //And wheather this end state represents an end game
@@ -52,6 +53,7 @@ public:
     int getNumbChildren(){ return children.size();};
     int getDepth(){ return depthLevel;};
     Lookahead* getParent(){ return parent;};
+    int getDraws(){return draws;};
     
     //Used when copying the game state back to the real game
     shared_ptr<Player> getPlayer1(){ return player1;};
@@ -76,6 +78,16 @@ public:
         games++;
         if (parent)
             parent->addWin(lossAmount);
+    }
+    
+    void addDraw(float drawScore)
+    {
+        games++;
+        draws++;
+        wins+=drawScore;
+        if (parent)
+            parent->addDraw(drawScore);
+        
     }
     
     void addGame(){ games++;}

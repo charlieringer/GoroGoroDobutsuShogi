@@ -1047,7 +1047,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/AI/Lookahead.cpp"
-            timestampString = "480248660.731289"
+            timestampString = "480375066.83706"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "96"
@@ -1079,7 +1079,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/AI/Lookahead.cpp"
-            timestampString = "480244821.379681"
+            timestampString = "480375066.83706"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "33"
@@ -1093,7 +1093,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/AI/Lookahead.cpp"
-            timestampString = "480248660.731289"
+            timestampString = "480375066.83706"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "58"
@@ -1109,7 +1109,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/AI/Lookahead.cpp"
-            timestampString = "480248660.731289"
+            timestampString = "480375066.83706"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "126"
@@ -1125,7 +1125,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/AI/Lookahead.cpp"
-            timestampString = "480248660.731289"
+            timestampString = "480375066.83706"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "59"
@@ -1141,13 +1141,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/AI/Lookahead.cpp"
-            timestampString = "480248660.731289"
+            timestampString = "480375066.83706"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "205"
-            endingLineNumber = "205"
-            landmarkName = "Lookahead::checkTerminality()"
-            landmarkType = "5">
+            endingLineNumber = "205">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1157,12 +1155,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/AI/Lookahead.cpp"
-            timestampString = "479413259.817994"
+            timestampString = "480372773.588283"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "20"
             endingLineNumber = "20"
-            landmarkName = "Lookahead::Lookahead(vector&lt;GamePiecePtr&gt;&amp; _gameboard, shared_ptr&lt;Player&gt; _player1, shared_ptr&lt;Player&gt; _player2, Lookahead* _parent, int _depthLevel)"
+            landmarkName = "Lookahead::Lookahead(vector&lt;GamePiecePtr&gt;&amp; _gameboard, shared_ptr&lt;Player&gt; _player1, shared_ptr&lt;Player&gt; _player2, Lookahead* _parent, int _depthLevel, char _type)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1173,7 +1171,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/AI/Lookahead.cpp"
-            timestampString = "480248660.731289"
+            timestampString = "480375066.83706"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "97"
@@ -1221,7 +1219,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/AI/Lookahead.cpp"
-            timestampString = "480248660.731289"
+            timestampString = "480375066.83706"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "76"
@@ -1237,11 +1235,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/AI/AIBrain.cpp"
-            timestampString = "480244045.624943"
+            timestampString = "480374450.778289"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "160"
-            endingLineNumber = "160"
+            startingLineNumber = "170"
+            endingLineNumber = "170"
             landmarkName = "AIBrain::mcts(vector&lt;GamePiecePtr&gt;&amp; gameBoard, Player* p1, Player* p2)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1253,7 +1251,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/AI/Lookahead.cpp"
-            timestampString = "480248660.731289"
+            timestampString = "480375066.83706"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "193"
@@ -1269,7 +1267,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/AI/Lookahead.cpp"
-            timestampString = "480248660.731289"
+            timestampString = "480375066.83706"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "110"
@@ -1285,7 +1283,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/AI/Lookahead.cpp"
-            timestampString = "480248660.731289"
+            timestampString = "480375066.83706"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "113"
@@ -1301,7 +1299,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/AI/Lookahead.cpp"
-            timestampString = "480248660.731289"
+            timestampString = "480375066.83706"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "99"
@@ -1333,7 +1331,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/AI/Lookahead.cpp"
-            timestampString = "480248660.731289"
+            timestampString = "480375066.83706"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "108"
@@ -1349,12 +1347,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/AI/Lookahead.cpp"
-            timestampString = "480248660.731289"
+            timestampString = "480375066.83706"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "165"
             endingLineNumber = "165"
-            landmarkName = "Lookahead::simulateDroppedPiece(vector&lt;GamePiecePtr&gt; &amp;board, GamePiecePtr piece, shared_ptr&lt;Player&gt; owner, int x,int y)"
+            landmarkName = "Lookahead::simulateDroppedPiece(vector&lt;GamePiecePtr&gt;&amp; board, GamePiecePtr piece, shared_ptr&lt;Player&gt; owner, int x,int y)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1365,12 +1363,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/AI/Lookahead.cpp"
-            timestampString = "480248660.731289"
+            timestampString = "480375066.83706"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "171"
             endingLineNumber = "171"
-            landmarkName = "Lookahead::simulateDroppedPiece(vector&lt;GamePiecePtr&gt; &amp;board, GamePiecePtr piece, shared_ptr&lt;Player&gt; owner, int x,int y)"
+            landmarkName = "Lookahead::simulateDroppedPiece(vector&lt;GamePiecePtr&gt;&amp; board, GamePiecePtr piece, shared_ptr&lt;Player&gt; owner, int x,int y)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1381,12 +1379,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/AI/Lookahead.cpp"
-            timestampString = "480248660.731289"
+            timestampString = "480375066.83706"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "172"
             endingLineNumber = "172"
-            landmarkName = "Lookahead::simulateDroppedPiece(vector&lt;GamePiecePtr&gt; &amp;board, GamePiecePtr piece, shared_ptr&lt;Player&gt; owner, int x,int y)"
+            landmarkName = "Lookahead::simulateDroppedPiece(vector&lt;GamePiecePtr&gt;&amp; board, GamePiecePtr piece, shared_ptr&lt;Player&gt; owner, int x,int y)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1397,7 +1395,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/AI/Lookahead.cpp"
-            timestampString = "480248660.731289"
+            timestampString = "480375066.83706"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "151"
@@ -1413,7 +1411,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/AI/Lookahead.cpp"
-            timestampString = "480248660.731289"
+            timestampString = "480375066.83706"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "82"
@@ -1429,11 +1427,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/AI/AIBrain.cpp"
-            timestampString = "480244045.624943"
+            timestampString = "480374450.778289"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "153"
-            endingLineNumber = "153"
+            startingLineNumber = "163"
+            endingLineNumber = "163"
             landmarkName = "AIBrain::mcts(vector&lt;GamePiecePtr&gt;&amp; gameBoard, Player* p1, Player* p2)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1477,11 +1475,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/AI/AIBrain.cpp"
-            timestampString = "480244045.624943"
+            timestampString = "480374450.778289"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "141"
-            endingLineNumber = "141"
+            startingLineNumber = "151"
+            endingLineNumber = "151"
             landmarkName = "AIBrain::mcts(vector&lt;GamePiecePtr&gt;&amp; gameBoard, Player* p1, Player* p2)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1493,11 +1491,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/AI/AIBrain.cpp"
-            timestampString = "480244045.624943"
+            timestampString = "480372157.25884"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "110"
-            endingLineNumber = "110"
+            startingLineNumber = "111"
+            endingLineNumber = "111"
             landmarkName = "AIBrain::mcts(vector&lt;GamePiecePtr&gt;&amp; gameBoard, Player* p1, Player* p2)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1509,7 +1507,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/AI/Lookahead.cpp"
-            timestampString = "480248660.731289"
+            timestampString = "480375066.83706"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "133"
@@ -1525,13 +1523,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/AI/Lookahead.cpp"
-            timestampString = "480248660.731289"
+            timestampString = "480375066.83706"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "238"
-            endingLineNumber = "238"
-            landmarkName = "Lookahead::copyGameBoard(vector&lt;GamePiecePtr&gt; initalBoard, shared_ptr&lt;Player&gt; p1, shared_ptr&lt;Player&gt; p2)"
-            landmarkType = "5">
+            endingLineNumber = "238">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1573,11 +1569,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/AI/AIBrain.cpp"
-            timestampString = "480244045.624943"
+            timestampString = "480374450.778289"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "129"
-            endingLineNumber = "129"
+            startingLineNumber = "140"
+            endingLineNumber = "140"
             landmarkName = "AIBrain::mcts(vector&lt;GamePiecePtr&gt;&amp; gameBoard, Player* p1, Player* p2)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1605,11 +1601,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/AI/AIBrain.cpp"
-            timestampString = "480244045.624943"
+            timestampString = "480374450.778289"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "134"
-            endingLineNumber = "134"
+            startingLineNumber = "144"
+            endingLineNumber = "144"
             landmarkName = "AIBrain::mcts(vector&lt;GamePiecePtr&gt;&amp; gameBoard, Player* p1, Player* p2)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1621,11 +1617,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/AI/AIBrain.cpp"
-            timestampString = "480244045.624943"
+            timestampString = "480374450.778289"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "142"
-            endingLineNumber = "142"
+            startingLineNumber = "152"
+            endingLineNumber = "152"
             landmarkName = "AIBrain::mcts(vector&lt;GamePiecePtr&gt;&amp; gameBoard, Player* p1, Player* p2)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1701,11 +1697,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/AI/AIBrain.cpp"
-            timestampString = "480244045.624943"
+            timestampString = "480374450.778289"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "130"
-            endingLineNumber = "130"
+            startingLineNumber = "140"
+            endingLineNumber = "140"
             landmarkName = "AIBrain::mcts(vector&lt;GamePiecePtr&gt;&amp; gameBoard, Player* p1, Player* p2)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1765,11 +1761,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/AI/AIBrain.cpp"
-            timestampString = "480244045.624943"
+            timestampString = "480374450.778289"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "121"
-            endingLineNumber = "121"
+            startingLineNumber = "131"
+            endingLineNumber = "131"
             landmarkName = "AIBrain::mcts(vector&lt;GamePiecePtr&gt;&amp; gameBoard, Player* p1, Player* p2)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1781,7 +1777,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/AI/AIBrain.cpp"
-            timestampString = "480244045.624943"
+            timestampString = "480372157.25884"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "104"
@@ -1813,11 +1809,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/Game/Game.cpp"
-            timestampString = "480177809.603462"
+            timestampString = "480375250.439442"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "121"
-            endingLineNumber = "121"
+            startingLineNumber = "124"
+            endingLineNumber = "124"
             landmarkName = "Game::takeAITurn()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1829,11 +1825,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/Game/Game.cpp"
-            timestampString = "480177809.603462"
+            timestampString = "480375250.439442"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "125"
-            endingLineNumber = "125"
+            startingLineNumber = "128"
+            endingLineNumber = "128"
             landmarkName = "Game::takeAITurn()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1845,11 +1841,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/Game/Game.cpp"
-            timestampString = "480177809.603462"
+            timestampString = "480375250.439442"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "134"
-            endingLineNumber = "134"
+            startingLineNumber = "137"
+            endingLineNumber = "137"
             landmarkName = "Game::takeAITurn()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1861,27 +1857,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/Game/Game.cpp"
-            timestampString = "480177809.603462"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "133"
-            endingLineNumber = "133"
-            landmarkName = "Game::takeAITurn()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "src/Game/Game.cpp"
-            timestampString = "480177809.603462"
+            timestampString = "480375250.439442"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "136"
             endingLineNumber = "136"
+            landmarkName = "Game::takeAITurn()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/Game/Game.cpp"
+            timestampString = "480375250.439442"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "139"
+            endingLineNumber = "139"
             landmarkName = "Game::takeAITurn()"
             landmarkType = "5">
             <Locations>
@@ -1941,11 +1937,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/Game/Game.cpp"
-            timestampString = "480177809.603462"
+            timestampString = "480375250.439442"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "131"
-            endingLineNumber = "131"
+            startingLineNumber = "134"
+            endingLineNumber = "134"
             landmarkName = "Game::takeAITurn()"
             landmarkType = "5">
          </BreakpointContent>
@@ -2069,11 +2065,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/AI/AIBrain.cpp"
-            timestampString = "480244045.624943"
+            timestampString = "480374450.778289"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "130"
-            endingLineNumber = "130"
+            startingLineNumber = "140"
+            endingLineNumber = "140"
             landmarkName = "AIBrain::mcts(vector&lt;GamePiecePtr&gt;&amp; gameBoard, Player* p1, Player* p2)"
             landmarkType = "5">
          </BreakpointContent>
@@ -2133,11 +2129,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/AI/AIBrain.cpp"
-            timestampString = "480244045.624943"
+            timestampString = "480374450.778289"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "133"
-            endingLineNumber = "133"
+            startingLineNumber = "143"
+            endingLineNumber = "143"
             landmarkName = "AIBrain::mcts(vector&lt;GamePiecePtr&gt;&amp; gameBoard, Player* p1, Player* p2)"
             landmarkType = "5">
          </BreakpointContent>
@@ -2149,11 +2145,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/AI/AIBrain.cpp"
-            timestampString = "480244045.624943"
+            timestampString = "480374450.778289"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "131"
-            endingLineNumber = "131"
+            startingLineNumber = "141"
+            endingLineNumber = "141"
             landmarkName = "AIBrain::mcts(vector&lt;GamePiecePtr&gt;&amp; gameBoard, Player* p1, Player* p2)"
             landmarkType = "5">
          </BreakpointContent>
@@ -2229,11 +2225,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/AI/AIBrain.cpp"
-            timestampString = "480244045.624943"
+            timestampString = "480372157.25884"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "105"
-            endingLineNumber = "105"
+            startingLineNumber = "106"
+            endingLineNumber = "106"
             landmarkName = "AIBrain::mcts(vector&lt;GamePiecePtr&gt;&amp; gameBoard, Player* p1, Player* p2)"
             landmarkType = "5">
          </BreakpointContent>
@@ -2245,11 +2241,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/AI/AIBrain.cpp"
-            timestampString = "480244045.624943"
+            timestampString = "480372157.25884"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "110"
-            endingLineNumber = "110"
+            startingLineNumber = "111"
+            endingLineNumber = "111"
             landmarkName = "AIBrain::mcts(vector&lt;GamePiecePtr&gt;&amp; gameBoard, Player* p1, Player* p2)"
             landmarkType = "5">
          </BreakpointContent>
@@ -2309,7 +2305,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/AI/Lookahead.cpp"
-            timestampString = "480244821.379681"
+            timestampString = "480375066.83706"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "30"
@@ -2403,11 +2399,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/Game/Game.cpp"
-            timestampString = "480178148.818569"
+            timestampString = "480375250.439442"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "216"
-            endingLineNumber = "216"
+            startingLineNumber = "219"
+            endingLineNumber = "219"
             landmarkName = "Game::handleClick(int x, int y)"
             landmarkType = "5">
          </BreakpointContent>
@@ -2419,11 +2415,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/Game/Game.cpp"
-            timestampString = "480191061.862085"
+            timestampString = "480375250.439442"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "327"
-            endingLineNumber = "327"
+            startingLineNumber = "330"
+            endingLineNumber = "330"
             landmarkName = "Game::handleDroppedPiece(int x,int y)"
             landmarkType = "5">
          </BreakpointContent>
@@ -2435,11 +2431,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/Game/Game.cpp"
-            timestampString = "480191061.862085"
+            timestampString = "480375250.439442"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "328"
-            endingLineNumber = "328"
+            startingLineNumber = "331"
+            endingLineNumber = "331"
             landmarkName = "Game::handleDroppedPiece(int x,int y)"
             landmarkType = "5">
          </BreakpointContent>
@@ -2552,6 +2548,22 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "14"
             endingLineNumber = "14">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/AI/AIBrain.cpp"
+            timestampString = "480374450.778289"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "211"
+            endingLineNumber = "211"
+            landmarkName = "AIBrain::randomPlayOut(Lookahead* playOutNode)"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

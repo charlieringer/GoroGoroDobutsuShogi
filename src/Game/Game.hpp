@@ -44,7 +44,7 @@ private:
     void movePiece(GamePiecePtr selectedPiece, int x, int y);
     void promotePiece(GamePiecePtr piece);
     bool handleDroppedPiece(int x,int y);
-    bool playersTurn = true;
+    bool playersTurn;
     void reset();
     void checkEnd();
     void takeAITurn();
@@ -57,9 +57,6 @@ public:
     virtual void update();
     virtual void draw();
     virtual void handleClick(int x, int y);
-    
-    
-    
 };
 
 #endif /* Game_hpp */

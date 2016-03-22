@@ -14,7 +14,7 @@ void ofApp::setup(){
     GameState::setState(FRONTEND);
     //And starting AI values
     AIValues::setExploreConstant(1);
-    AIValues::setNumIterations(5000);
+    AIValues::setNumIterations(1000);
 }
 
 //--------------------------------------------------------------

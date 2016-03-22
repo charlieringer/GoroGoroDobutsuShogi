@@ -102,6 +102,7 @@ Lookahead AIBrain::mcts(vector<GamePiecePtr>& gameBoard, Player* p1, Player* p2)
         //Then find the best child of that node (and subseqent nodes)
         while(bestChild->getNumbChildren() > 0)
         {
+            assert(!bestChild->terminal());
             cout << "Level " << level << " ";
             level++;
             //We reset these values
@@ -109,9 +110,18 @@ Lookahead AIBrain::mcts(vector<GamePiecePtr>& gameBoard, Player* p1, Player* p2)
             bestIndex = -1;
             //We loop through the children trying to find the best one.
             for(int i = 0; i < bestChild->getNumbChildren(); i++){
+                //Terminal states are always the best so just use the first one we come to
+                if (bestChild->getChildren()[i].terminal())
+                {
+                    bestScore = 0;
+                    bestIndex = i;
+                    break;
+                }
+
                 //Scores as per the previous part
                 float wins = bestChild->getChildren()[i].getWins();
                 int games = bestChild->getChildren()[i].getNumbCompletedGames();
+                
                 
                 //UBT (Upper Confidence Bound 1 applied to trees) function for deterimining
                 //How much we want to explore vs exploit.
@@ -149,7 +159,7 @@ Lookahead AIBrain::mcts(vector<GamePiecePtr>& gameBoard, Player* p1, Player* p2)
         float wins = potentialMoves[i].getWins();
         int games = potentialMoves[i].getNumbCompletedGames();
         float score = (wins/games);
-        cout << i << " th move played: " << potentialMoves[i].getNumbCompletedGames() << " and scores: " << score << endl;
+        cout << i << " th move played: " << potentialMoves[i].getNumbCompletedGames() << " and scores: " << score << ". It drew: " << potentialMoves[i].getDraws() << " times." <<endl;
         //In MCTS moves are selected not by their win% but by how often they were explored hence we selected the most played node
         if(games > mostGames)
         {
@@ -195,9 +205,10 @@ void AIBrain::randomPlayOut(Lookahead* playOutNode)
         } else {
             //We only want to look so far, this is 16 plies (or 8 moves for each person). Chosen arbitrarily.
             //If we get this far we just record it as a game but otherwise do nothing.
-            if (evaluatedMoves.size() > 16)
+            if (evaluatedMoves.size() > 32)
             {
-                playOutNode->addGame();
+                //We can control how much a draw (unfinished game) is worth. Currently values at 1/2 a win
+                playOutNode->addDraw(0.5);
                 return;
             }
             //Lastly we get a new random move and add it to our moves.

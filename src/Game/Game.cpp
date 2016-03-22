@@ -36,6 +36,11 @@ Game::Game(shared_ptr<ImageBank> _imgBank): xOffset(100), yOffset(170), pieceHei
     gameboard.push_back(make_shared<ElephantPiece>(0,3, player, imgBank));
     gameboard.push_back(make_shared<LionPiece>(1,3, player, imgBank));
     gameboard.push_back(make_shared<GiraffePiece>(2,3, player, imgBank));
+    
+    //Random starting player
+    int chooseStarter = rand()%2;
+    if(chooseStarter == 0)
+        playersTurn = false;
 }
 
 Game::Game(const Game& other): xOffset(100), yOffset(170), pieceHeight(80), pieceWidth(80)
@@ -457,5 +462,10 @@ void Game::reset()
     gameboard.push_back(make_shared<ElephantPiece>(0,3, player, imgBank));
     gameboard.push_back(make_shared<LionPiece>(1,3, player, imgBank));
     gameboard.push_back(make_shared<GiraffePiece>(2,3, player, imgBank));
+    
+    //Random starting player
+    int chooseStarter = rand()%2;
+    if(chooseStarter == 0)
+        playersTurn = false;
 }
 
