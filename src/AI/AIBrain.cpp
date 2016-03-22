@@ -203,7 +203,7 @@ void AIBrain::randomPlayOut(Lookahead* playOutNode)
             else playOutNode->addLoss(1);
             
         } else {
-            //We only want to look so far, this is 16 plies (or 8 moves for each person). Chosen arbitrarily.
+            //We only want to look so far, this is 32 plies (or 16 moves for each person). Chosen arbitrarily.
             //If we get this far we just record it as a game but otherwise do nothing.
             if (evaluatedMoves.size() > 32)
             {

@@ -1160,7 +1160,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "20"
             endingLineNumber = "20"
-            landmarkName = "Lookahead::Lookahead(vector&lt;GamePiecePtr&gt;&amp; _gameboard, shared_ptr&lt;Player&gt; _player1, shared_ptr&lt;Player&gt; _player2, Lookahead* _parent, int _depthLevel, char _type)"
+            landmarkName = "Lookahead::Lookahead(vector&lt;GamePiecePtr&gt;&amp; _gameboard, shared_ptr&lt;Player&gt; _player1, shared_ptr&lt;Player&gt; _player2, Lookahead* _parent, int _depthLevel)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
