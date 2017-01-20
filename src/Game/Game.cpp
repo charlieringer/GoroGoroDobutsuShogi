@@ -88,10 +88,21 @@ void Game::draw()
     gameBackground->draw(xOffset,yOffset);
     
     //And instructions
-    if(playersTurn)
+    if(simulation)
+    {
+        if(playersTurn)
+            dispFont.drawString("Forest Turn", 80, 80);
+        else
+            dispFont.drawString("Sky Turn", 80, 80);
+        
+    } else {
+    if (lost)
+       dispFont.drawString("You Lost", 80, 80);
+    else if(playersTurn)
         dispFont.drawString("Your Turn", 80, 80);
     else
        dispFont.drawString("AI thinking...", 40, 80);
+    }
     
     //Finally we draw all of the game peices on the board...
     for(GamePiecePtr &gamePiece : gameboard) gamePiece->drawPiece(xOffset, pieceWidth, yOffset, pieceHeight);
@@ -120,7 +131,20 @@ void Game::update()
 void Game::takeAITurn()
 {
     //If it not the AIs turn we exit early
-    if(playersTurn) return;
+    if(playersTurn && !simulation) return;
+    
+    
+    if(playersTurn)
+    {
+        if(!aiStarted)
+        {
+            //If the AI is not started we start it.
+            aiStarted = true;
+            brain->startAI(gameboard, player, ai);
+            return;
+        }
+        
+    }
     
     //Otherwise we have AI work to do
     if(!aiStarted)
@@ -131,6 +155,14 @@ void Game::takeAITurn()
         return;
     } else if(brain->hasNextMove())
     {
+        if(firstMove && !simulation)
+        {
+            firstMove = false;
+            aiStarted = false;
+            takeAITurn();
+            return;
+        }
+        
         //Then when we have the next move the AI is done thinking so we can update the board
         //First we clear it
         gameboard.clear();
@@ -192,7 +224,7 @@ void Game::takeAITurn()
                 player->addToBank(piece->getType());
         }
         //then switch the players turn and check the end
-        playersTurn = true;
+        playersTurn = !playersTurn;
         checkEnd();
         aiStarted = false;
     }
@@ -201,6 +233,18 @@ void Game::takeAITurn()
 
 void Game::handleClick(int x, int y)
 {
+    if (simulation)
+    {
+        simulation = false;
+        reset();
+        GameState::setState(FRONTEND);
+        return;
+    }
+    if (lost)
+    {
+        resetLoss();
+        return;
+    }
     //No interaction if it is not the players turn
     if(!playersTurn) return;
     
@@ -399,6 +443,11 @@ void Game::checkEnd()
             playerHasLion = true;
             if (gamePiece->getY() == 0)
             {
+                if(simulation)
+                {
+                    reset();
+                    return;
+                }
                 //Player got the lion to the end
                 //Game won!
                 reset();
@@ -413,10 +462,14 @@ void Game::checkEnd()
             aiHasLion = true;
             if (gamePiece->getY() == 3)
             {
+                if(simulation)
+                {
+                    reset();
+                    return;
+                }
+                lost = true;
                 //AI got the lion to the end
                 //Game lost!
-                reset();
-                GameState::setState(GAMEOVERLOSE);
                 return;
             }
         }
@@ -425,18 +478,34 @@ void Game::checkEnd()
     {
         //Player's lion captured
         //Game lost!
-        reset();
-        GameState::setState(GAMEOVERLOSE);
+        if(simulation)
+        {
+            reset();
+            return;
+        }
+        lost = true;
         return;
     }
     if(!aiHasLion)
     {
         //AIs lion captured
-        //Game won!
+        //Game won
+        if(simulation)
+        {
+            reset();
+            return;
+        }
         reset();
         GameState::setState(GAMEOVERWIN);
         return;
     }
+}
+
+void Game::resetLoss()
+{
+    lost = false;
+    reset();
+    GameState::setState(GAMEOVERLOSE);
 }
 
 void Game::reset()
@@ -462,7 +531,9 @@ void Game::reset()
     gameboard.push_back(make_shared<ElephantPiece>(0,3, player, imgBank));
     gameboard.push_back(make_shared<LionPiece>(1,3, player, imgBank));
     gameboard.push_back(make_shared<GiraffePiece>(2,3, player, imgBank));
-    
+    brain->reset();
+    aiStarted = false;
+    firstMove = true;
     //Random starting player
     int chooseStarter = rand()%2;
     if(chooseStarter == 0)

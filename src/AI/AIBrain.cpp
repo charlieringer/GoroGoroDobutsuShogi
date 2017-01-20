@@ -19,6 +19,12 @@ AIBrain::~AIBrain()
         delete aiThread;
 }
 
+void AIBrain::reset()
+{
+    bool threadDone = false;
+    bool aiStarted = false;
+}
+
 void AIBrain::startAI(vector<GamePiecePtr>& gameBoard, Player* p1, Player* p2)
 {
     //We set the thread to a new thread starting a MCTS search
@@ -30,9 +36,10 @@ void AIBrain::startAI(vector<GamePiecePtr>& gameBoard, Player* p1, Player* p2)
 void AIBrain::startMCTS(vector<GamePiecePtr>& gameBoard, Player* p1, Player* p2)
 {
     //threadDone is just a flag that is set when we are done with the AI
-    //(as it is on a different thread so we need to be told when it is don).
+    //(as it is on a different thread so we need to be told when it is done).
     threadDone = false;
     //We set the nextMove (which is what the main game gets hold of) to the result of a Monte Carlo Tree Search
+    
     nextMove = mcts(gameBoard, p1, p2);
     threadDone = true;
 
@@ -44,7 +51,7 @@ Lookahead AIBrain::mcts(vector<GamePiecePtr>& gameBoard, Player* p1, Player* p2)
     //This is just safety code if the AI tried to make a move before the state has changed but the game is over.
     if (currentState.terminal()) return currentState;
     
-    cout << "----- MAKING MOVE -----" << endl;
+    //cout << "----- MAKING MOVE -----" << endl;
     
     //These are our availaible moves
     vector<Lookahead> potentialMoves = currentState.getChildren();
@@ -56,13 +63,13 @@ Lookahead AIBrain::mcts(vector<GamePiecePtr>& gameBoard, Player* p1, Player* p2)
     //Whilst we have not played enough games...
     int loopCounter = 1;
     while(currentState.getNumbCompletedGames() < totalItters){
-        cout << "Loop: " << loopCounter << endl;
+        //cout << "Loop: " << loopCounter << endl;
         loopCounter++;
         
         //Find the best child node
         float bestScore = -1;
         int bestIndex = -1;
-        cout << "Level 0" << " ";
+        //cout << "Level 0" << " ";
         //First we find the most promising of our potential moves
         for(int i = 0; i < potentialMoves.size(); i++){
             //This is a early escape if any of the potential moves are terminal.
@@ -97,13 +104,13 @@ Lookahead AIBrain::mcts(vector<GamePiecePtr>& gameBoard, Player* p1, Player* p2)
         Lookahead* bestChild;
         bestChild = &potentialMoves[bestIndex];
         
-        cout << "Chosen node " << bestIndex << endl;
+        //cout << "Chosen node " << bestIndex << endl;
         int level = 1;
         //Then find the best child of that node (and subseqent nodes)
         while(bestChild->getNumbChildren() > 0)
         {
             assert(!bestChild->terminal());
-            cout << "Level " << level << " ";
+            //cout << "Level " << level << " ";
             level++;
             //We reset these values
             bestScore = -1;
@@ -139,9 +146,9 @@ Lookahead AIBrain::mcts(vector<GamePiecePtr>& gameBoard, Player* p1, Player* p2)
                 }
             }
             bestChild = &bestChild->getChildren()[bestIndex];
-            cout << "Chosen node " << bestIndex << endl;
+            //cout << "Chosen node " << bestIndex << endl;
         }
-        cout << endl;
+        //cout << endl;
         assert(bestScore!=-1);
         assert(bestIndex!=-1);
         assert(!(bestChild->getParent()->terminal()));
@@ -167,7 +174,7 @@ Lookahead AIBrain::mcts(vector<GamePiecePtr>& gameBoard, Player* p1, Player* p2)
             bestIndex = i;
         }
     }
-    cout << "Chosen move: " << bestIndex << endl;
+    //cout << "Chosen move: " << bestIndex << endl;
     return potentialMoves[bestIndex];
 }
 

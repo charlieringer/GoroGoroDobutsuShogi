@@ -45,3 +45,8 @@ void Frontend::handleClick(int x, int y)
         GameState::setState(INSTRUCTIONS);
     
 }
+
+void Frontend::handleKey()
+{
+    GameState::setState(GAME);
+}

@@ -41,6 +41,7 @@ public:
     };
     bool hasNextMove(){ return threadDone;};
     bool started(){ return aiStarted;};
+    void reset();
 };
 
 #endif /* AIBrain_hpp */

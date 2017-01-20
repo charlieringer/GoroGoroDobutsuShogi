@@ -40,14 +40,18 @@ private:
     int yOffset;
     ofTrueTypeFont dispFont;
     bool aiStarted = false;
+    bool firstMove = true;
     
     void movePiece(GamePiecePtr selectedPiece, int x, int y);
     void promotePiece(GamePiecePtr piece);
     bool handleDroppedPiece(int x,int y);
     bool playersTurn;
+    bool lost = false;
+    bool simulation = false;
     void reset();
     void checkEnd();
     void takeAITurn();
+    void resetLoss();
     
 public:
     Game(shared_ptr<ImageBank> _imgBank);

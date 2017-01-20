@@ -31,6 +31,7 @@ public:
     virtual void update(){};
     virtual void draw();
     virtual void handleClick(int x, int y);
+    void handleKey();
 };
 
 #endif /* Frontend_hpp */
